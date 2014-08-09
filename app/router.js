@@ -5,6 +5,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource("card-set", {path: "/card_set/:card_set_id"});
 });
 
 export default Router;

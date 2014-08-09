@@ -29,7 +29,7 @@ html, body {
   }
 }
 
-#left-nav {
+#set-nav {
   position: absolute;
   top: 60px;
   min-height: 400px;
@@ -38,6 +38,11 @@ html, body {
   background: #add8e6;
   overflow: hidden;
   z-index: 1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  h3 {
+    margin: 10px 0 0 0;
+  }
 }
 
 #content {
@@ -50,9 +55,25 @@ a {
 
 ul {
   list-style-type: none;
+  margin: 0;
 }
 
 .hidden {
   display: none;
 }
+ul {
+  padding: 0;
+}
+ul#card-list {
+  li {
+    border: black 1px solid;
+    border-radius: 6px;
+    background: lavenderblush;
+    padding: 6px;
+    margin-bottom: 10px;
+  }
+  .card-front {
+    font-weight: bold;
+  }
 
+}
