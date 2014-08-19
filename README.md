@@ -50,4 +50,4 @@ Authentication: basic token-based at first, with OAuth 2 possible at some point
 
 
 ###License
-Copyright 2013 Michael Madrid under the [MIT License](http://opensource.org/licenses/MIT)
+Copyright 2014 Michael Madrid under the [MIT License](http://opensource.org/licenses/MIT)
