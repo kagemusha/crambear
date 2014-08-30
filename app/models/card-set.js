@@ -5,6 +5,7 @@ var attr = DS.attr;
 
 export default DS.Model.extend({
   cards: DS.hasMany("card"),
+  labels: [], //todo: impl labels model as hasMany
   cardCount: Em.computed.alias("cards.length"),
   name: attr(),
   public: attr()

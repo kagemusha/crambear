@@ -1,16 +1,22 @@
 {{render set-nav}}
 
-<h3>{{name}} ({{cards.length}} cards)</h3>
+<div id="card-list-section">
+  <h3>
+    {{name}}
+    ({{cards.length}} cards)
+    {{link-to "Study" 'study' model class='btn action-button'}}
+  </h3>
 
-<ul id="card-list">
-  {{#each card in cards}}
-    <li>
-      <div class="card-front">
-        {{card.front}}
-      </div>
-      <div class="card-back">
-        {{card.back}}
-      </div>
-    </li>
-  {{/each}}
-</ul>
+  <ul id="card-list">
+    {{#each card in cards}}
+      <li>
+        <div class="card-front">
+          {{card.front}}
+        </div>
+        <div class="card-back">
+          {{card.back}}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

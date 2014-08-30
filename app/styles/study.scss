@@ -1,0 +1,154 @@
+$study-page-left-margin: 50px;
+
+#study-page {
+  //min-width:  800px
+  //width: 100%
+  margin: 30px 20px 0 0;
+}
+
+#content#study-page {
+  margin: 20px;
+}
+
+$study-elem-horiz-padding: 4px;
+$study-elem-width: 800px;
+
+#study-filters-bar {
+  border-top: 1px black solid;
+  margin-top: 12px;
+  padding: 4px $study-elem-horiz-padding;
+  width: 852px;
+  .label {
+    font-weight: bold;
+}
+}
+
+.study-filter-button {
+  margin-right: 6px;
+  min-width: 70px;
+  background: lightgrey;
+  &.is-selected, &.is-showing-archived {
+    background: $dark-purple;
+}
+}
+
+$studyBtnBarHeight: 40px;
+
+#study-btn-bar {
+  position: relative;
+  text-align: center;
+  border-top: 3px black solid;
+  border-bottom: 3px black solid;
+  padding: 10px 30px;
+  height: $studyBtnBarHeight;
+  margin-bottom: 14px;
+  width: $study-elem-width;
+  button {
+    font-size: 32px;
+    min-width: 160px;
+    height: $studyBtnBarHeight;
+    border: 3px black solid;
+    background: beige;
+    color: red;
+    font-weight: bold;
+    box-shadow: "10px 10px 5px #888888";
+}
+  #correctBtn {
+    color: darkgreen;
+}
+  #study-set-name {
+    position: absolute;
+    font-size: 22px;
+    color: $dark-purple;
+    font-weight: bold;
+    width: 240px;
+    overflow: hidden;
+    text-align: left;
+    left: 4px;
+    bottom: 0;
+}
+  #study-status-msg {
+    position: absolute;
+    font-size: 22px;
+    color: $dark-purple;
+    font-weight: bold;
+    width: 240px;
+    text-align: right;
+    right: 4px;
+    top: 2px;
+}
+}
+
+#study-buttons {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@mixin expandedCard {
+  padding: 30px;
+  font-size: 22px;
+  font-weight: bold;
+  height: 240px;
+  background: $primary-green;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+@mixin collapsedCard {
+  background: black;
+  color: black;
+  height: 20px;
+  padding: 0 30px;
+  font-size: 0;
+}
+
+#card-back.is-showing-front {
+  @include collapsedCard;
+}
+
+#study-results {
+  font-size: 22px;
+  padding: 10px;
+}
+
+.study-panel {
+  position: relative;
+  .card {
+    width: $study-elem-width;
+    @include expandedCard;
+}
+}
+
+$transition-time: 300ms;
+
+.is-showing-front, .is-showing-back {
+  -moz-transition: width $transition-time, height $transition-time, background-color $transition-time;
+  -webkit-transition: width $transition-time, height $transition-time, background-color $transition-time;
+  -o-transition: width $transition-time, height $transition-time, background-color $transition-time;
+  transition: width $transition-time, height $transition-time, background-color $transition-time;
+}
+
+#connector1 {
+  display: none;
+  height: 100px;
+  background: black;
+  width: 10px;
+  position: absolute;
+  top: 0;
+  left: 72%;
+}
+
+#study-bear-img {
+  position: absolute;
+  top: 42px;
+  left: 74%;
+  z-index: 100;
+}
+
+#new-set-page {
+  width: 600px;
+  text-align: center;
+  font-size: 22px;
+}
+
+

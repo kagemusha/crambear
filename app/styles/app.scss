@@ -1,3 +1,6 @@
+@import "variables";
+@import "study";
+
 $top-nav-height: 40px;
 
 html, body {
@@ -24,29 +27,35 @@ html, body {
     padding-left: 25px;
     a {
       font-size: 24px;
-      color: cyan;
+      color: $light-purple;
     }
   }
 }
 
 #set-nav {
   position: absolute;
-  top: 60px;
+  top: 80px;
   min-height: 400px;
   left: 20px;
   width: 200px;
-  background: #add8e6;
   overflow: hidden;
   z-index: 1;
   padding: 4px 8px;
   border-radius: 4px;
   h3 {
     margin: 10px 0 0 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    margin: 20px 0 8px 0;
+  };
+  ul.card-sets {
+    color: $dark-purple;
+    font-weight: bold;
   }
 }
 
 #content {
-  margin: 60px 20px 0 250px;
+  margin: 60px 20px 20px 20px;
 }
 
 a {
@@ -64,16 +73,36 @@ ul {
 ul {
   padding: 0;
 }
+
+#card-list-section{
+  margin-left: 240px;
+}
+
 ul#card-list {
   li {
     border: black 1px solid;
     border-radius: 6px;
-    background: lavenderblush;
+    background: $primary-green;
     padding: 6px;
     margin-bottom: 10px;
   }
   .card-front {
     font-weight: bold;
   }
+}
 
+.li-link {
+  cursor: pointer;
+}
+
+button, .btn {
+  color:  white;
+  border:  none;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.action-button {
+  background: red;
+  padding: 1px 4px;
 }
