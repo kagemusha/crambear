@@ -3,13 +3,13 @@
   {{#if isLoggedIn}}
     (show userSets)
   {{else}}
-    Login - todo
+    (Login to view) - todo
   {{/if}}
 
   <h3>Public Sets</h3>
-  <ul>
+  <ul class="card-sets">
     {{#each set in publicSets}}
-      {{#link-to "card-set" set tagName="li" }}{{set.name}} ({{set.cardCount}}){{/link-to}}
+      {{#link-to "card-set" set tagName="li" class='li-link'}}{{set.name}} ({{set.cardCount}}){{/link-to}}
     {{/each}}
   </ul>
 </div>

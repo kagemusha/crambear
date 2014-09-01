@@ -1,6 +1,6 @@
 <h2>Public Sets</h2>
 <ul>
   {{#each set in model}}
-    {{#link-to "card-set" set tagName="li" }}{{set.name}} ({{set.cardCount}}){{/link-to}}
+    {{#link-to "card-set" set tagName="li" class='li-link' }}{{set.name}} ({{set.cardCount}}){{/link-to}}
   {{/each}}
 </ul>
