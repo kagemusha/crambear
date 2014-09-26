@@ -73,8 +73,9 @@ export default Ember.ObjectController.extend({
     this.set("cardsLeft", this.order.length);
     return console.log("order: " + this.order);
   },
-  inFilter: function(card) {
-    return true;
+  inFilter: function(/*card*/) {
+    return;
+    /*
     if (card.get("archived") && !this.get("isShowingArchived")) {
       return false;
     }
@@ -90,6 +91,7 @@ export default Ember.ObjectController.extend({
       return cardLabels.contains(1 * labelId);
     });
     return includedLabel != null;
+    */
   },
   initLabels: function() {
     return Ember.K();
