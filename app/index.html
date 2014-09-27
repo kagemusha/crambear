@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{BASE_TAG}}
+    {{CONFIG_META}}
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/crambear.css">
@@ -15,10 +16,5 @@
   <body>
     <script src="assets/vendor.js"></script>
     <script src="assets/crambear.js"></script>
-    <script>
-      window.CrambearENV = require('crambear/config/environment')['default'];
-      window.EmberENV = window.CrambearENV.EmberENV;
-      window.Crambear = require('crambear/app')['default'].create(CrambearENV.APP);
-    </script>
   </body>
 </html>

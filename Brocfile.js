@@ -6,7 +6,7 @@ var app = new EmberApp();
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
-app.import('vendor/lodash/dist/lodash.js');
+app.import('bower_components/lodash/dist/lodash.js');
 
 // If you need to use different assets in different
 // environments, specify an object as the first parameter. That
