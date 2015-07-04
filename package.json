@@ -30,10 +30,9 @@
     "ember-cli-qunit": "0.3.13",
     "ember-cli-sass": "4.0.1",
     "ember-cli-uglify": "^1.0.1",
-    "ember-data": "1.0.0-beta.18",
+    "ember-data": "1.13.2",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-json-api": "^0.4.5",
     "underscore.string": "^3.1.1"
   }
 }

@@ -1,8 +1,7 @@
-import Ember from 'ember';
-import JsonApiAdapter from 'ember-json-api/json-api-adapter';
+import DS from 'ember-data';
 import config from '../config/environment';
 
-export default JsonApiAdapter.extend({
+export default DS.JSONAPIAdapter.extend({
   host: config.APP.SERVER,
   pathForType(type) {
     var underscored = Ember.String.underscore(type);
