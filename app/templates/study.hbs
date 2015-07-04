@@ -3,8 +3,8 @@
   <div id="study-filters-bar">
       <button {{bind-attr class=":study-filter-button isShowingArched"}}{{action "toggleArchived"}}>show archived</button>
       <span class="label">Filters:</span>
-      {{#each filters}}
-        <button {{bind-attr class=":study-filter-button isSelected"}}{{action "toggleFilter" id}}>{{name}}</button>
+      {{#each filters as |filter| }}
+        <button class=study-filter-button {{if isSelected 'is-urgent'}} {{action "toggleFilter" id}}>{{name}}</button>
       {{/each}}
   </div>
   <div id="study-btn-bar">
@@ -30,7 +30,7 @@
         You got {{correctCount}} out of {{filteredTotal}} right
       </div>
     {{else}}
-      <div id="card-back" {{bind-attr class=":card isShowingFront isShowingBack"}}>
+      <div id="card-back" class="card {{if isShowingFront 'is-showing-front'}} {{if isShowingBack 'is-showing-back'}} "}}>
         {{back}}
       </div>
       <div id="card-front" class="card">

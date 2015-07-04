@@ -8,7 +8,7 @@
 
   <h3>Public Sets</h3>
   <ul class="card-sets">
-    {{#each set in publicSets}}
+    {{#each publicSets as |set| }}
       {{#link-to "card-set" set tagName="li" class='li-link'}}{{set.name}} ({{set.cardCount}}){{/link-to}}
     {{/each}}
   </ul>

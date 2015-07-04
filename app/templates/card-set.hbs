@@ -3,12 +3,12 @@
 <div id="card-list-section">
   <h3>
     {{name}}
-    ({{cards.length}} cards)
+    ({{model.cards.length}} cards)
     {{link-to "Study" 'study' model class='btn action-button'}}
   </h3>
 
   <ul id="card-list">
-    {{#each card in cards}}
+    {{#each model.cards as |card| }}
       <li>
         <div class="card-front">
           {{card.front}}
