@@ -4,4 +4,17 @@
          {{link-to "Crambear" "index"}}
     </div>
   </div>
+  <div class="nav-item">
+    {{#if isLoggedIn}}
+        <div class="'nav-item">
+          {{currentUser.email}}
+          <button {{action 'logout'}}>Logout</button>
+        </div>
+    {{else}}
+      <label>Login</label>
+      {{input value=email placeholder='email'}}
+      {{input value=password placeholder='password'}}
+      <button {{action 'login'}}>Login</button>
+    {{/if}}
+  </div>
 </div>
