@@ -2,13 +2,14 @@
 
 import Ember from 'ember';
 
-var alias = Ember.computed.alias;
+var readOnly = Ember.computed.readOnly;
 
-export default Ember.ObjectController.extend({
-  cards: alias("content.cards"),
-  cardSetName: alias("content.name"),
-  front: alias("currentCard.front"),
-  back: alias("currentCard.back"),
+export default Ember.Controller.extend({
+  cards: readOnly("cardSet.cards"),
+  cardSetName: readOnly("cardSet.name"),
+  currentCard: null,
+  front: readOnly("currentCard.front"),
+  back: readOnly("currentCard.back"),
   pageRendered: true,
   isShowingArchived: false,
   isShowingFront: true,
@@ -18,10 +19,9 @@ export default Ember.ObjectController.extend({
   correctCount: 0,
   cardsLeft: 0,
   finished: false,
-  currentCard: null,
   order: [],
   filteredTotal: {
-    cards: alias("order.length")
+    cards: readOnly("order.length")
   },
   total: (function() {
     if (this.get("cards")) {
@@ -33,10 +33,10 @@ export default Ember.ObjectController.extend({
   statusMsg: (function() {
     return "" + (this.get('cardsLeft')) + " of " + (this.get('filteredTotal')) + " left";
   }).property("cardsLeft", "filteredTotal"),
-  cardSetLabels: alias("content.labels"),
+  cardSetLabels: readOnly("cardSet.labels"),
   selectedFilterIds: Ember.A(),
   filters: (function() {
-    return this.get('labels').map((function(_this) {
+    return this.get('cardSet.labels').map((function(_this) {
       return function(label) {
         var labelId, selected;
         labelId = 1 * label.get("id");

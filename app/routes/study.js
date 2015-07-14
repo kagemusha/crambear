@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     return this.store.findRecord('cardSet', params.card_set_id);
   },
   setupController: function(controller, model) {
-    controller.set('content', model);
+    controller.set('cardSet', model);
     return controller.reset();
   }
 });
