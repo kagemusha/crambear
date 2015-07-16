@@ -9,4 +9,9 @@ export default Ember.Route.extend({
       });
     }
   },
+  actions: {
+    showNewCardSetModal(){
+      this.controllerFor('application').toggleProperty('isShowingModal');
+    },
+  }
 });

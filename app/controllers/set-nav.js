@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ["application"],
-  publicSets: function(){
+  isLoggedIn: Em.computed.readOnly('session.isAuthenticated'),
+  cardSets: function(){
     var cardSets = this.store.peekAll('cardSet').filterBy('public', true);
     if (cardSets.get('length') < 2) {
       //will always have at least one set on cardSet page, but not whole set

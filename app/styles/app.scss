@@ -1,6 +1,9 @@
 @import "variables";
 @import "study";
 
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
 $top-nav-height: 40px;
 
 html, body {

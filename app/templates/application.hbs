@@ -3,3 +3,15 @@
 <div id="content">
   {{outlet}}
 </div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog
+  close="toggleModal"
+  alignmentTarget="#new-set-button"
+  alignment='right'
+  }}
+    <label>Name</label>
+    {{input value=newCardSetName placeholder='name'}}
+    <button {{action 'createCardSet'}}>New Set</button>
+  {{/modal-dialog}}
+{{/if}}

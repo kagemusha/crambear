@@ -1,4 +1,7 @@
 <h2>Public Sets</h2>
+<button id="new-set-button" {{action "showNewCardSetModal"}}>New Set</button>
+
+
 <ul>
   {{#each model as |set| }}
     {{#link-to "card-set" set tagName="li" class='li-link' }}{{set.name}} ({{set.cardCount}}){{/link-to}}

@@ -1,15 +1,13 @@
 <div id="set-nav">
   <h3>My Sets</h3>
   {{#if isLoggedIn}}
-    (show userSets)
+      <ul class="card-sets">
+        {{#each cardSets as |set| }}
+          {{#link-to "card-set" set tagName="li" class='li-link'}}{{set.name}} ({{set.cardCount}}){{/link-to}}
+        {{/each}}
+      </ul>
   {{else}}
-    (Login to view) - todo
+    Please login
   {{/if}}
 
-  <h3>Public Sets</h3>
-  <ul class="card-sets">
-    {{#each publicSets as |set| }}
-      {{#link-to "card-set" set tagName="li" class='li-link'}}{{set.name}} ({{set.cardCount}}){{/link-to}}
-    {{/each}}
-  </ul>
 </div>

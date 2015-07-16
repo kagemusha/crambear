@@ -7,11 +7,12 @@ export default Em.Controller.extend({
   email: null,
   password: null,
   loggingOut: false,
-  isLoggedIn: Em.computed.and('session.isAuthenticated'),
-
-
+  isLoggedIn: Em.computed.readOnly('session.isAuthenticated'),
+  isShowingModal: false,
+  newCardSetName: "", //set in modal
   actions: {
-    login() {
+
+    login(){
       var email = this.get('email')
       var password = this.get('password')
       this.get('userService').login(email, password).catch((error)=>{
@@ -25,8 +26,8 @@ export default Em.Controller.extend({
         this.set('loggingIn', false);
       });
     },
-    logout() {
 
+    logout(){
       if(this.get('loggingOut')) { return; }
       this.set('loggingOut', true);
 
@@ -35,6 +36,19 @@ export default Em.Controller.extend({
       }).finally(()=>{
         this.set('loggingOut', false);
       });
+    },
+
+    createCardSet(){
+      if (!Ember.isEmpty(this.get('newCardSetName'))){
+        var newSet = this.store.createRecord('card-set', {name: this.get('newCardSetName')});
+        newSet.save().then((cardSet)=>{
+          this.transitionToRoute('card-set', cardSet);
+        }).catch((reason)=>{
+          alert("new set failed");
+        }).finally(()=>{
+          this.set("isShowingModal", false);
+        })
+      }
     }
   }
 });
