@@ -1,0 +1,13 @@
+{{#if card.isBeingEdited}}
+  {{card-editor saveCard='saveCard' card=card}}
+{{else}}
+  {{#if card.belongsToCurrentUser}}
+    <button {{action 'deleteCard' card}}>x</button>
+  {{/if}}
+  <div class="card-front">
+    {{card.front}}
+  </div>
+  <div class="card-back">
+    {{card.back}}
+  </div>
+{{/if}}

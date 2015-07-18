@@ -6,18 +6,15 @@
     ({{model.cards.length}} cards)
     <br/>
     {{link-to "Study" 'study' model class='btn action-button'}}
+    <button {{action 'addCard'}}>Add Card</button>
   </h3>
+  {{#if showCardEditor}}
+    {{card-editor saveCard='saveNewCard' card=card}}
+  {{/if}}
 
   <ul id="card-list">
     {{#each model.cards as |card| }}
-      <li>
-        <div class="card-front">
-          {{card.front}}
-        </div>
-        <div class="card-back">
-          {{card.back}}
-        </div>
-      </li>
+      {{card-item card=card deleteCard='deleteCard'}}
     {{/each}}
   </ul>
 </div>
