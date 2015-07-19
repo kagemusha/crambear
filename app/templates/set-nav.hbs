@@ -3,7 +3,12 @@
   {{#if isLoggedIn}}
       <ul class="card-sets">
         {{#each cardSets as |set| }}
-          {{#link-to "card-set" set tagName="li" class='li-link'}}{{set.name}} ({{set.cardCount}}){{/link-to}}
+          <li class='li-link'>
+            {{#if set.belongsToCurrentUser}}
+              <button {{action 'deleteCardSet' set}}>x</button>
+            {{/if}}
+            {{#link-to "card-set" set}}{{set.name}} ({{set.cardCount}}){{/link-to}}
+          </li>
         {{/each}}
       </ul>
   {{else}}

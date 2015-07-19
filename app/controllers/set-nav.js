@@ -12,5 +12,13 @@ export default Ember.Controller.extend({
       return cardSets;
     }
   }.property(),
-  mySets: null       //if loggedIn getCurrentUser's sets else null
+  mySets: null,       //if loggedIn getCurrentUser's sets else null
+  actions: {
+    deleteCardSet(set){
+      set.deleteRecord();
+      set.save().catch(()=>{
+        alert('error deleting set')
+      })
+    }
+  }
 });
