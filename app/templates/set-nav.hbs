@@ -1,5 +1,8 @@
 <div id="set-nav">
-  <h3>My Sets</h3>
+  <h3>
+    My Sets
+    <button id="new-set-button" {{action "showNewCardSetModal"}}>New Set</button>
+  </h3>
   {{#if isLoggedIn}}
       <ul class="card-sets">
         {{#each cardSets as |set| }}

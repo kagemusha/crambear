@@ -1,0 +1,20 @@
+<h2>
+  My Sets
+  <button id="new-set-button" {{action "showNewCardSetModal"}}>New Set</button>
+</h2>
+<ul class="card-sets">
+  {{#each model as |set| }}
+    <li class='li-link'>
+      {{#if set.belongsToCurrentUser}}
+        <button {{action 'deleteCardSet' set}}>x</button>
+      {{/if}}
+      {{#link-to "card-set" set}}{{set.name}} ({{set.cardCount}}){{/link-to}}
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Recent Test Results</h2>
+TBD
+
+<h2>Sets you might like</h2>
+TBD

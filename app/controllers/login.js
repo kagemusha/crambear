@@ -18,9 +18,7 @@ export default Ember.Controller.extend({
 
   actions: {
     login(email, password) {
-      this.get('userService').login(email, password).then(()=>{
-        this.send('successfulSignIn');
-      }).catch((error)=>{
+      this.get('userService').login(email, password).catch((error)=>{
         var errorMessage = error;
         // http 401 = "Unauthorized" from jQuery XHR
         if(error === 'Unauthorized') {
@@ -32,9 +30,5 @@ export default Ember.Controller.extend({
       });
     },
 
-    successfulSignIn() {
-      this.resetForm();
-      this.transitionToRoute(this.get('returnTo'));
-    }
   }
 });

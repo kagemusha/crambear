@@ -1,17 +1,24 @@
-import Em from 'ember';
+import Ember from 'ember';
 
-export default Em.Controller.extend({
+export default Ember.Controller.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.alias('userService.currentUser'),
 
   email: null,
   password: null,
   loggingOut: false,
-  isLoggedIn: Em.computed.readOnly('session.isAuthenticated'),
+  isLoggedIn: Ember.computed.readOnly('userService.isLoggedIn'),
   isShowingModal: false,
   newCardSetName: "", //set in modal
+  onSessionStatusChange: function(){
+    this.transitionAway();
+  }.observes('isLoggedIn').on('init'),
+  transitionAway(){
+    if (this.get('isLoggedIn')) {
+      this.transitionToRoute('dashboard');
+    }
+  },
   actions: {
-
     login(){
       var email = this.get('email')
       var password = this.get('password')

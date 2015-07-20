@@ -13,5 +13,14 @@ export default Ember.Route.extend({
     showNewCardSetModal(){
       this.controllerFor('application').toggleProperty('isShowingModal');
     },
+    willTransition(transition) {
+      if (this.get('session.isAuthenticated')){
+        if (transition.targetName === 'index'){
+          transition.abort();
+          this.transitionTo('dashboard');
+        }
+      }
+      console.log("transis to appl");
+    }
   }
 });

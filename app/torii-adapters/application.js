@@ -6,38 +6,39 @@ const LOGOUT_URL = `${config.APP.SERVER}/users/sign_out`
 
 export default Ember.Object.extend({
   userService: Ember.inject.service(),
+  currentUser: Ember.computed.alias("userService.currentUser"),
 
-  pushUserToStore: function(userData){
+  pushUserToStore(userData) {
     var store = this.get('store');
     var users = store.pushPayload('user', userData);
     var user = store.peekAll('user').objectAt(0);
-    this.set('userService.currentUser', user);
+    this.set('currentUser', user);
     return user;
   },
-  open: function(response){
+  open(response) {
     var user = this.pushUserToStore(response);
     ClientStorage.set('authToken', user.get('authToken'));
     return Ember.RSVP.Promise.resolve({currentUser: user});
   },
-  fetch: function(){
+  fetch() {
     var self = this;
-    return new Ember.RSVP.Promise(function(resolve, reject){
+    return new Ember.RSVP.Promise((resolve, reject)=> {
       var authToken = ClientStorage.get('authToken');
       if (!authToken) {
         reject("No authToken present");
         return;
       }
 
-      var success = function(response) {
-        Ember.run(function(){
+      var success = (response)=>{
+        Ember.run(()=>{
           var user = self.pushUserToStore(response);
           ClientStorage.set('authToken', user.get('authToken'));
           resolve({currentUser: user});
         });
       };
 
-      var error = function(jqxhr, status, error){
-        Ember.run(function(){
+      var error = (jqxhr, status, error)=>{
+        Ember.run(()=>{
           reject(error);
         });
       };
@@ -54,19 +55,22 @@ export default Ember.Object.extend({
       });
     });
   },
-  close: function(){
-    return new Ember.RSVP.Promise(function(resolve, reject){
+  close() {
+    return new Ember.RSVP.Promise((resolve, reject)=>{
       var authToken = ClientStorage.get('authToken');
 
-      var success = function() {
-        Ember.run(function(){
+      var success = ()=> {
+        var store = this.get('store');
+          store.unloadRecord(this.get('currentUser'));
+          this.set('currentUser', null);
+        Ember.run(()=>{
           ClientStorage.remove('authToken');
           resolve();
         });
       };
 
-      var error = function(jqxhr, status, error){
-        Ember.run(function(){
+      var error = (jqxhr, status, error)=>{
+        Ember.run(()=>{
           reject(error);
         });
       };
@@ -74,7 +78,7 @@ export default Ember.Object.extend({
       Ember.$.ajax({
         type: "DELETE",
         url: LOGOUT_URL,
-        beforeSend: function(xhr){
+        beforeSend: (xhr)=>{
           xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
         },
         success: success,
