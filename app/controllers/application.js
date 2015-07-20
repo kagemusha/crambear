@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   password: null,
   loggingOut: false,
   isLoggedIn: Ember.computed.readOnly('userService.isLoggedIn'),
-  isShowingModal: false,
+  showCardSetCreateModal: false,
   newCardSetName: "", //set in modal
   onSessionStatusChange: function(){
     this.transitionAway();
@@ -45,17 +45,6 @@ export default Ember.Controller.extend({
       });
     },
 
-    createCardSet(){
-      if (!Ember.isEmpty(this.get('newCardSetName'))){
-        var newSet = this.store.createRecord('card-set', {name: this.get('newCardSetName')});
-        newSet.save().then((cardSet)=>{
-          this.transitionToRoute('card-set', cardSet);
-        }).catch((reason)=>{
-          alert("new set failed");
-        }).finally(()=>{
-          this.set("isShowingModal", false);
-        })
-      }
-    }
+
   }
 });

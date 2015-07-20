@@ -11,7 +11,30 @@ export default Ember.Route.extend({
   },
   actions: {
     showNewCardSetModal(){
-      this.controllerFor('application').toggleProperty('isShowingModal');
+      this.controllerFor('application').toggleProperty('showCardSetCreateModal');
+    },
+    toggleModal(){
+      this.controllerFor('application').toggleProperty('showCardSetCreateModal');
+    },
+    createCardSet(){
+      var name = this.controllerFor('application') .get('newCardSetName')
+      if (!Ember.isEmpty(name)){
+        var newSet = this.store.createRecord('card-set', {name: name});
+        newSet.save().then((cardSet)=>{
+          this.transitionTo('card-set', cardSet);
+        }).catch((reason)=>{
+          alert("new set failed");
+        }).finally(()=>{
+          this.controllerFor('application') .set('newCardSetName', '');
+          this.controllerFor('application').toggleProperty('showCardSetCreateModal');
+        })
+      }
+    },
+    deleteCardSet(set){
+      set.deleteRecord();
+      set.save().catch(()=>{
+        alert('error deleting set')
+      })
     },
     willTransition(transition) {
       if (this.get('session.isAuthenticated')){
