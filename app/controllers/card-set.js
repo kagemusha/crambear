@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
   currentUser: Ember.computed.readOnly("userService.currentUser"),
   showCardEditor: false,
   card: null,
-  isBeingEdited: false,
 
   actions: {
     addCard(){
