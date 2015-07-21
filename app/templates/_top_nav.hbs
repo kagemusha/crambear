@@ -1,20 +1,32 @@
 <div id="top-nav">
-  <div class="nav-item">
+  <div class="nav-section">
     <div id="title">
          {{link-to "Crambear" "application"}}
     </div>
   </div>
-  <div class="nav-item">
-    {{#if isLoggedIn}}
-        <div class="'nav-item">
-          {{currentUser.email}}
-          <button {{action 'logout'}}>Logout</button>
-        </div>
-    {{else}}
-      <label>Login</label>
+  <div class="nav-section">
+  {{#if isLoggedIn}}
+    <div class="nav-item">
+      {{currentUser.email}}
+    </div>
+    <div class="nav-item">
+      <button {{action 'logout'}}>Logout</button>
+    </div>
+  {{else}}
+    <div class="nav-item">
+      <div>
+        <label>Login</label>
+      </div>
+    </div>
+    <div class="nav-item">
       {{input value=email placeholder='email'}}
+    </div>
+    <div class="nav-item">
       {{input value=password placeholder='password'}}
+    </div>
+    <div class="nav-item">
       <button {{action 'login'}}>Login</button>
-    {{/if}}
+    </div>
+  {{/if}}
   </div>
 </div>

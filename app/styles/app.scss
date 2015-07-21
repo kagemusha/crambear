@@ -1,5 +1,6 @@
 @import 'ember-paper';
 @import "variables";
+@import "mixins";
 @import "study";
 
 @import "ember-modal-dialog/ember-modal-structure";
@@ -18,7 +19,7 @@ html, body {
   left:0px;
   width:100%;
   z-index:2;
-  background: #282828;
+  background: #49AA67;
   color: white;
   height: $top-nav-height;
   padding: 0;
@@ -27,13 +28,23 @@ html, body {
   justify-content: space-between;
   font-size: 12px;
   #title {
-    padding: 6px;
+    @include vertical-centered-container;
     padding-left: 25px;
     a {
       font-size: 24px;
-      color: $light-purple;
+      color: white;
     }
   }
+}
+.nav-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav-item {
+  @include vertical-centered-container;
+  margin-right: 10px;
 }
 
 #set-nav {
