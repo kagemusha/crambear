@@ -1,7 +1,7 @@
 <div id="study-page">
   <div id="connector1"></div>
   <div id="study-filters-bar">
-      <button {{bind-attr class=":study-filter-button isShowingArched"}}{{action "toggleArchived"}}>show archived</button>
+      <button class="study-filter-button {{if isShowingArchived 'is-showing-archived'}}" {{action "toggleArchived"}}>show archived</button>
       <span class="label">Filters:</span>
       {{#each filters as |filter| }}
         <button class=study-filter-button {{if isSelected 'is-urgent'}} {{action "toggleFilter" id}}>{{name}}</button>
