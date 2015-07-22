@@ -1,9 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  userService: Ember.inject.service(),
+  isLoggedIn: Ember.computed.readOnly("userService.isLoggedIn"),
+
 
   beforeModel() {
-    if (!this.get('session.isAuthenticated')){
+    if (!this.get('isLoggedIn')){
       return this.get('session').fetch('application').catch(()=>{
         console.log('error');
       });
