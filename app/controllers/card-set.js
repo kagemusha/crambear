@@ -16,17 +16,17 @@ export default Ember.Controller.extend({
     },
     saveNewCard(){
       let card = this.get('card');
-      card.set('cardSet', this.get('model'))
+      card.set('cardSet', this.get('model'));
       card.save().then((card)=>{
         card.set('isBeingEdited', false);
         let newCard = this.store.createRecord("card", {
           isBeingEdited: true,
         });
         this.set('card', newCard);
-      }).catch((reason)=>{
+      }).catch(()=>{
         //TODO: don't show until created
         card.rollback();
-      })
+      });
     },
   }
 });

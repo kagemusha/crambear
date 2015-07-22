@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import ClientStorage from 'crambear/util/client-storage';
 import config from 'crambear/config/environment';
-const CURRENT_USER_URL = `${config.APP.SERVER}/users/me`
-const LOGOUT_URL = `${config.APP.SERVER}/users/sign_out`
+const CURRENT_USER_URL = `${config.APP.SERVER}/users/me`;
+const LOGOUT_URL = `${config.APP.SERVER}/users/sign_out`;
 
 export default Ember.Object.extend({
   userService: Ember.inject.service(),
@@ -10,8 +10,9 @@ export default Ember.Object.extend({
 
   pushUserToStore(userData) {
     var store = this.get('store');
-    var users = store.pushPayload('user', userData);
-    var user = store.peekAll('user').objectAt(0);
+    store.pushPayload('user', userData);
+    var userId = userData.data.id;
+    var user = store.peekRecord('user', userId);
     this.set('currentUser', user);
     return user;
   },
@@ -61,8 +62,10 @@ export default Ember.Object.extend({
 
       var success = ()=> {
         var store = this.get('store');
-          store.unloadRecord(this.get('currentUser'));
-          this.set('currentUser', null);
+        store.unloadAll('card-set');
+        store.unloadAll('card');
+        store.unloadRecord(this.get('currentUser'));
+        this.set('currentUser', null);
         Ember.run(()=>{
           ClientStorage.remove('authToken');
           resolve();

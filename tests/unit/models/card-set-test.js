@@ -2,11 +2,11 @@ import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('card-set', 'CardSet', {
   // Specify the other units that are required for this test.
-  needs: ['model:card']
+  needs: ['model:user', 'model:card']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(model);
+  assert.ok(model);
 });

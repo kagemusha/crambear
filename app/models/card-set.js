@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import Em from 'ember';
+import Ember from 'ember';
 
 var attr = DS.attr;
 
@@ -16,7 +16,7 @@ export default DS.Model.extend({
   user: DS.belongsTo("user"),
   cards: DS.hasMany("card"),
   labels: [], //todo: impl labels model as hasMany
-  cardCount: Em.computed.alias("cards.length"),
+  cardCount: Ember.computed.alias("cards.length"),
   name: attr(),
   public: attr()
 });

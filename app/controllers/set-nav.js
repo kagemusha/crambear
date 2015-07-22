@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  isLoggedIn: Em.computed.readOnly('session.isAuthenticated'),
+  isLoggedIn: Ember.computed.readOnly('session.isAuthenticated'),
   cardSets: function(){
     var cardSets = this.store.peekAll('cardSet').filterBy('public', true);
     if (cardSets.get('length') < 2) {

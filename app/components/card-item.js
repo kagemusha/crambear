@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     if (!card.get('belongsToCurrentUser')){
       return;
     }
-    card.set('isBeingEdited', true)
+    card.set('isBeingEdited', true);
     console.log("edit card");
   },
   actions: {
@@ -21,10 +21,10 @@ export default Ember.Component.extend({
       let card = this.get('card');
       card.save().then((card)=>{
         card.set('isBeingEdited', false);
-      }).catch((reason)=>{
+      }).catch(()=>{
         //TODO: don't show until created
         card.rollback();
-      })
+      });
     },
   }
 });

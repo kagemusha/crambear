@@ -5,7 +5,8 @@ moduleFor('route:study', 'StudyRoute', {
   // needs: ['controller:foo']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
+  assert.expect(1);
   var route = this.subject();
-  ok(route);
+  assert.ok(route);
 });

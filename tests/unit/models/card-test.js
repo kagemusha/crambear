@@ -3,8 +3,8 @@ moduleForModel('card', 'Card', {
   needs: ['model:card-set']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
-  ok(model);
+  assert.ok(model);
 });
 
