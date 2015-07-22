@@ -39,6 +39,9 @@ The basic data model is:
         belongs to card_set
         has and belongs to many cards
 
+### Tests
+
+There are currently very basic unit tests.  Acceptance tests are coming, but pending better ways to mock the new json-api spec.  Will be looking at [ember-cli-mirage](https://github.com/samselikoff/ember-cli-mirage), where json-api mock responses are on roadmap but not ready yet.
 ### Other Features
 
 Authentication: basic token-based at first, with OAuth 2 possible at some point
