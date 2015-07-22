@@ -34,7 +34,6 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
     "ember-modal-dialog": "0.7.5",
-    "ember-paper": "0.2.6",
     "torii": "^0.5.1",
     "underscore.string": "^3.1.1"
   }
