@@ -1,13 +1,21 @@
-{{render 'set-nav'}}
 
 <div id="card-list-section">
-  <h3>
-    {{model.name}}
-    ({{model.cards.length}} cards)
-    <br/>
-    {{link-to "Study" 'study' model class='btn action-button'}}
-    <button {{action 'addCard'}}>Add Card</button>
-  </h3>
+  <h2 id="card-set-name">
+    {{#if model.belongsToCurrentUser}}
+      {{autosave-input
+      controlId="cardset-name-input"
+      value=model.name
+      label="Name"
+      }}
+    {{else}}
+      {{model.name}}
+    {{/if}}
+  </h2>
+  <span class="sub-header">
+    {{model.cards.length}} cards
+    {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="addCard" icon='mdi-content-add'}}
+  </span>
+  {{link-to "Study" 'study' model class='btn action-button'}}
   {{#if showCardEditor}}
     {{card-editor saveCard='saveNewCard' card=card}}
   {{/if}}
