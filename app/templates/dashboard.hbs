@@ -1,20 +1,22 @@
 <h2>
   My Sets
-  <button id="new-set-button" {{action "showNewCardSetModal"}}>New Set</button>
+  {{md-btn id="new-set-button" buttonType='floating' class='btn-small' action="showNewCardSetModal" icon='mdi-content-add'}}
 </h2>
-<ul class="card-sets">
-  {{#each model as |set| }}
-    <li class='li-link'>
-      {{#if set.belongsToCurrentUser}}
-        <button {{action 'deleteCardSet' set}}>x</button>
-      {{/if}}
-      {{#link-to "card-set" set}}{{set.name}} ({{set.cardCount}}){{/link-to}}
-    </li>
-  {{/each}}
-</ul>
+{{#md-table content=model as |set|}}
 
-<h2>Recent Test Results</h2>
-TBD
+  {{#md-table-col row=set key='name' header='Name'}}
+    {{#link-to "card-set" set}}{{set.name}}{{/link-to}}
+  {{/md-table-col}}
 
-<h2>Sets you might like</h2>
-TBD
+  {{#md-table-col row=set key='cardCount' header='# Cards'}}
+    {{#link-to "card-set" set}}{{set.cardCount}} {{/link-to}}
+  {{/md-table-col}}
+
+  {{#md-table-col row=set key='actions' header=''}}
+    {{#if set.belongsToCurrentUser}}
+      {{md-btn action='deleteCardSet' buttonType='floating' class='btn-tiny' actionArg=set icon='mdi-action-delete' }}
+    {{/if}}
+  {{/md-table-col}}
+
+{{/md-table}}
+
