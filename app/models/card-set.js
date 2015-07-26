@@ -14,7 +14,7 @@ export default DS.Model.extend({
   }.property('currentUser', 'user'),
 
   user: DS.belongsTo("user"),
-  cards: DS.hasMany("card"),
+  cards: DS.hasMany("card", {async: true}),
   labels: [], //todo: impl labels model as hasMany
   cardCount: Ember.computed.alias("cards.length"),
   name: attr(),
