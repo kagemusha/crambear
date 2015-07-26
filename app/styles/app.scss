@@ -101,3 +101,16 @@ button, .btn {
   background: red;
   padding: 1px 4px;
 }
+.card-editor-field {
+  width: 100%;
+}
+
+.card-editor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  textarea {
+    background: white;
+    height: 6rem;
+  }
+}

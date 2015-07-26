@@ -1,6 +1,3 @@
-<label>Front</label>
-{{textarea value=card.front placeholder='front'}}
-<label>Back</label>
-{{textarea value=card.back placeholder='back'}}
-<button {{action 'saveCard'}}>Save</button>
-<button {{action 'hideCardEditor' bubbles=false}}>Cancel</button>
+{{autosave-textarea save='saveCard' value=card.front placeholder='front'}}
+&nbsp;&nbsp;
+{{autosave-textarea save='saveCard' value=card.back placeholder='back'}}

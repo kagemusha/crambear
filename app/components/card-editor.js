@@ -2,19 +2,21 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   card: null,
+  classNames: ['card-editor'],
   actions: {
     hideCardEditor(){
       this.set('card.isBeingEdited', false);
-      return true;
+      this.sendAction('hideCardEditor');
     },
     saveCard(){
-      var front = this.get('card.front');
-      var back = this.get('card.back');
-      if (Ember.isEmpty(front) || Ember.isEmpty(back)){
-        alert('Front and back must be filled in');
+      let card = this.get('card');
+      let front = card.get('front');
+      let back = card.get('back');
+      if (Ember.isEmpty(front) && Ember.isEmpty(back)){
+        alert('Front or back must be filled in');
         return;
       }
-      this.sendAction('saveCard');
+      this.sendAction('saveCard', card);
     }
   }
 });
