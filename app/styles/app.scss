@@ -29,12 +29,18 @@ html, body {
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
+  input[type=text], input[type=password] {
+    background: white;
+    color: black;
+  }
+  a {
+    color: white;
+  }
   #title {
     @include vertical-centered-container;
     padding-left: 25px;
     a {
       font-size: 24px;
-      color: white;
     }
   }
 }
@@ -50,7 +56,7 @@ html, body {
 }
 
 #content {
-  margin: 60px 20px 20px 20px;
+  margin: 80px 20px 20px 20px;
 }
 
 a {
@@ -60,17 +66,15 @@ a {
 ul {
   list-style-type: none;
   margin: 0;
+  padding: 0;
 }
 
 .hidden {
   display: none;
 }
-ul {
-  padding: 0;
-}
 
 #card-list-section{
-  margin-left: 240px;
+  margin-left: 40px;
 }
 
 ul#card-list {
@@ -80,7 +84,7 @@ ul#card-list {
     justify-content: space-between;
     border: black 1px solid;
     border-radius: 6px;
-    background: $primary-green;
+    background: lightblue;
     padding: 6px;
     margin-bottom: 10px;
   }
@@ -93,17 +97,45 @@ ul#card-list {
   cursor: pointer;
 }
 
-button, .btn {
-  color:  white;
-  border:  none;
-  border-radius: 6px;
-  box-shadow: none;
-}
-
 .action-button {
   background: red;
   padding: 1px 4px;
 }
+
+.btn-floating.btn-tiny {
+  width: 20px;
+  height: 20px;
+  i {
+    font-size: 1em;
+    line-height: 20px;
+  }
+}
+
+h2 {
+  font-size: 2.5em;
+  input[type=text] {
+    font-size: 0.8em;
+  }
+  .input-field label {
+    top: 1.8rem;
+  }
+  small {
+    font-size: 50%;
+  }
+  .sub-header {
+    font-size: 0.5em;
+    color: darkgray;
+  }
+}
+
+#card-set-name {
+  margin-top: 20px;
+}
+
+html {
+  font-size: 16px;
+}
+
 .card-editor-field {
   width: 100%;
 }
