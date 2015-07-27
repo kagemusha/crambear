@@ -13,6 +13,10 @@
   }}
     <label>Name</label>
     {{input value=newCardSetName placeholder='name'}}
-    <button {{action 'createCardSet'}}>New Set</button>
+    {{md-btn text='New Set' action='createCardSet'}}
   {{/modal-dialog}}
+
+  {!-- ember-cli-materialize modal container --}}
+  {!-- todo: compare with current modal --}}
+  {{!md-modal-container}}
 {{/if}}
