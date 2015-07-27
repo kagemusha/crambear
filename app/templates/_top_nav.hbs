@@ -1,16 +1,23 @@
 <div id="top-nav">
   <div class="nav-section">
     <div id="title">
-         {{link-to "Crambear" "application"}}
+       {{link-to "Crambear" "application"}}
     </div>
   </div>
+  {{#if isLoggedIn}}
+    <div class="nav-section">
+      <div class="nav-item">
+        {{link-to "Dashboard" "dashboard"}}
+      </div>
+    </div>
+  {{/if}}
   <div class="nav-section">
   {{#if isLoggedIn}}
     <div class="nav-item">
       {{currentUser.email}}
     </div>
     <div class="nav-item">
-      <button {{action 'logout'}}>Logout</button>
+      {{md-btn text='Logout' action='logout'}}
     </div>
   {{else}}
     <div class="nav-item">
@@ -19,13 +26,13 @@
       </div>
     </div>
     <div class="nav-item">
-      {{input value=email placeholder='email'}}
+      {{md-input value=email label="email" placeholder='email'}}
     </div>
     <div class="nav-item">
-      {{input value=password placeholder='password'}}
+      {{md-input value=password type="password" placeholder='password'}}
     </div>
     <div class="nav-item">
-      <button {{action 'login'}}>Login</button>
+      {{md-btn text='Login' action='login'}}
     </div>
   {{/if}}
   </div>
