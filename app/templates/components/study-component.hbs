@@ -1,0 +1,28 @@
+{{#unless isFinished}}
+  {{#if isInitialized}}
+    <div id="study-status">
+      <div id=study-status-msg>{{statusMsg}}</div>
+      <div id="study-instructions">{{instructions}}</div>
+    </div>
+  {{/if}}
+{{/unless}}
+
+<div class="study-panel">
+  {{#if isFinished}}
+      <div id="study-results">
+        You got {{correctCount}} out of {{filteredTotal}} right ({{pctCorrect}})
+        {{md-btn buttonType='floating' icon='mdi-content-redo' class='btn-small' action='restart' id="restartBtn" }}
+      </div>
+  {{/if}}
+  {{#md-card-panel id='card-panel'}}
+    <div id="card-face" >
+        {{#unless isFinished}}
+          <div id="study-buttons" class={{if isShowingFront 'hidden'}}>
+            {{md-btn buttonType='floating' icon='mdi-action-check-circle' class='btn-small light-green accent-3' action='correct' id="correctBtn" }}
+            {{md-btn buttonType='floating' icon='mdi-content-clear' class='btn-small red' action='wrong' id="wrongBtn" }}
+          </div>
+        {{/unless}}
+      {{liquid-bind faceShowing}}
+    </div>
+  {{/md-card-panel}}
+</div>

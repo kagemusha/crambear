@@ -1,16 +1,26 @@
 /* global _ */
-
 import Ember from 'ember';
 
-var readOnly = Ember.computed.readOnly;
+const readOnly = Ember.computed.readOnly;
 
-export default Ember.Controller.extend({
+export default Ember.Component.extend({
+  onWillInsert: function(){
+    this.get('cardSet.cards').then((cards)=> {
+      this.reset();
+      this.set('isInitialized', true);
+    });
+  }.on('willInsertElement'),
   cards: readOnly("cardSet.cards"),
   cardSetName: readOnly("cardSet.name"),
   currentCard: null,
   front: readOnly("currentCard.front"),
   back: readOnly("currentCard.back"),
+  instructions: Ember.computed('isShowingFront', function(){
+    return this.get('isShowingFront') ? 'Click card to show answer' : '';
+  }),
   pageRendered: true,
+  faceShowing: "",
+  isInitialized: false,
   isShowingArchived: false,
   isShowingFront: true,
   isShowingBack: (function() {
@@ -18,10 +28,35 @@ export default Ember.Controller.extend({
   }).property("isShowingFront", "pageRendered"),
   correctCount: 0,
   cardsLeft: 0,
-  finished: false,
+  isFinished: false,
   order: [],
   filteredTotal: {
     cards: readOnly("order.length")
+  },
+  pctCorrect: Ember.computed('correctCount', 'filteredTotal', function(){
+    let total = this.get('filteredTotal');
+    if (total === 0){
+      return "-";
+    }
+    return `${Math.round(100 * this.get('correctCount')/total)}%`;
+  }),
+  click(event){
+    if (event.target.id === 'card-panel'){
+      this.send('flip');
+      let cardPanel = Ember.$('#card-panel');
+      let studyButtons = Ember.$('#study-buttons');
+      let cardPanelWidth = parseInt(cardPanel.css('width'));
+      let cardPanelHeight = parseInt(cardPanel.css('height'));
+      let buttonsWidth = parseInt(studyButtons.css('width'));
+      let buttonsHeight = parseInt(studyButtons.css('height'));
+      let maxLeft = cardPanelWidth - buttonsWidth;
+      let maxTop = cardPanelHeight - buttonsHeight;
+      let x = Math.min(Math.max(event.offsetX - buttonsWidth/4, 0), maxLeft);
+      let y = Math.min(Math.max(event.offsetY - buttonsHeight/2, 0), maxTop);
+
+      Ember.$('#study-buttons').css('top', `${y}px`);
+      Ember.$('#study-buttons').css('left', `${x}px`);
+    }
   },
   total: (function() {
     if (this.get("cards")) {
@@ -51,7 +86,7 @@ export default Ember.Controller.extend({
   }).property("selectedFilterIds.@each"),
 
   reset: function() {
-    this.set("finished", false);
+    this.set("isFinished", false);
     this.set("correctCount", 0);
     this.initLabels();
     this.orderCards();
@@ -60,7 +95,10 @@ export default Ember.Controller.extend({
   },
 
   orderCards: function() {
-    var cards = this.get("cards");
+    let cards = this.get('cards');
+    if (Ember.isEmpty(cards)){
+      return;
+    }
     var filteredCardIds = [];
     for (var i=0; i<cards.get('length'); i++){
       if (this.inFilter(cards.objectAt(i))){
@@ -96,10 +134,11 @@ export default Ember.Controller.extend({
   next: function() {
     this.set("isShowingFront", true);
     if (this.order.length === 0) {
-      return this.set("finished", true);
+      return this.set("isFinished", true);
     } else {
       var cardId = this.order.shift();
       this.set("currentCard", this.get("cards").objectAt(cardId));
+      this.set('faceShowing', this.get('currentCard.front'));
       return this.set("cardsLeft", this.order.length + 1);
     }
   },
@@ -117,7 +156,7 @@ export default Ember.Controller.extend({
       return this.next();
     },
     flip: function() {
-      console.log("action flipped");
+      this.set('faceShowing', this.get('currentCard.back'));
       return this.set("isShowingFront", false);
     },
     toggleArchived: function() {

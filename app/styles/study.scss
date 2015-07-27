@@ -3,7 +3,6 @@ $study-page-left-margin: 50px;
 #study-page {
   //min-width:  800px
   //width: 100%
-  margin: 30px 20px 0 0;
 }
 
 #content#study-page {
@@ -14,7 +13,6 @@ $study-elem-horiz-padding: 4px;
 $study-elem-width: 800px;
 
 #study-filters-bar {
-  border-top: 1px black solid;
   margin-top: 12px;
   padding: 4px $study-elem-horiz-padding;
   width: 852px;
@@ -37,17 +35,13 @@ $studyBtnBarHeight: 40px;
 #study-btn-bar {
   position: relative;
   text-align: center;
-  border-top: 3px black solid;
-  border-bottom: 3px black solid;
   padding: 10px 30px;
   height: $studyBtnBarHeight;
   margin-bottom: 14px;
   width: $study-elem-width;
   button {
     font-size: 32px;
-    min-width: 160px;
     height: $studyBtnBarHeight;
-    border: 3px black solid;
     background: beige;
     color: red;
     font-weight: bold;
@@ -77,11 +71,6 @@ $studyBtnBarHeight: 40px;
     right: 4px;
     top: 2px;
 }
-}
-
-#study-buttons {
-  width: 50%;
-  margin: 0 auto;
 }
 
 @mixin expandedCard {
@@ -151,4 +140,36 @@ $transition-time: 300ms;
   font-size: 22px;
 }
 
+#card-panel {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .btn-floating {
+    opacity: 0.6;
+  }
+}
 
+
+#card-face {
+  text-align: center;
+  font-size: 28px;
+}
+
+#study-buttons {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+}
+
+#study-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#study-instructions {
+  color: gray;
+  font-size: 12px;
+}

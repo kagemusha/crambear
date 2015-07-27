@@ -1,41 +1,7 @@
 <div id="study-page">
-  <div id="connector1"></div>
-  <div id="study-filters-bar">
-      <button class="study-filter-button {{if isShowingArchived 'is-showing-archived'}}" {{action "toggleArchived"}}>show archived</button>
-      <span class="label">Filters:</span>
-      {{#each filters as |filter| }}
-        <button class=study-filter-button {{if isSelected 'is-urgent'}} {{action "toggleFilter" id}}>{{name}}</button>
-      {{/each}}
-  </div>
   <div id="study-btn-bar">
-    <div id="study-set-name">{{cardSetName}}</div>
+    <div id="study-set-name">
+      {{link-to model.name 'card-set' model}}</div>
   </div>
-  {{#if finished}}
-    <button {{action 'restart'}} class="action-button">Restart</button>
-  {{else}}
-    <div id="action-buttons">
-      {{#if isShowingFront}}
-        <button {{action 'flip'}} id="flipBtn" class="action-button">Show Answer</button>
-      {{else}}
-        <button {{action 'correct'}} id="correctBtn" class="action-button">Correct</button>
-        <button {{action 'wrong}'}} class="action-button">Wrong</button>
-      {{/if}}
-    </div>
-    <div id=study-status-msg>{{statusMsg}}</div>
-  {{/if}}
-
-  <div class="study-panel">
-    {{#if finished}}
-      <div id="study-results">
-        You got {{correctCount}} out of {{filteredTotal}} right
-      </div>
-    {{else}}
-      <div id="card-back" class="card {{if isShowingFront 'is-showing-front'}} {{if isShowingBack 'is-showing-back'}} ">
-        {{back}}
-      </div>
-      <div id="card-front" class="card">
-        {{front}}
-      </div>
-    {{/if}}
-  </div>
+  {{study-component cardSet=model}}
 </div>
