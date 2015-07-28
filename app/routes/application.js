@@ -46,7 +46,6 @@ export default Ember.Route.extend({
           this.transitionTo('dashboard');
         }
       }
-      console.log("transis to appl");
     }
   }
 });
