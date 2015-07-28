@@ -6,3 +6,10 @@
     {{#link-to "card-set" set tagName="li" class='li-link' }}{{set.name}} ({{set.cardCount}}){{/link-to}}
   {{/each}}
 </ul>
+
+{{#md-card-panel id='registration-card'}}
+  {{md-input value=email label="email" type='text'}}
+  {{md-input value=password label="password" type='password'}}
+  {{md-input value=password_confirmation label="confirm password" type='password'}}
+ {{#md-btn class='btn-small' action='register'}}Register{{/md-btn}}
+{{/md-card-panel}}

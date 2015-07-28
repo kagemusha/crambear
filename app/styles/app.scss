@@ -150,3 +150,15 @@ html {
     height: 6rem;
   }
 }
+
+#registration-card {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 260px;
+  padding: 8px 12px;
+  input[type=text], input[type=password] {
+    height: 2.5rem;
+    margin: 0;
+  }
+}

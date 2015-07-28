@@ -12,6 +12,16 @@ export default Ember.Service.extend({
         password: password,
       }
     });
+  },
+  register(email, password, passwordConfirmation) {
+    var session = this.get('session');
+    return session.open('registration', {
+      user: {
+        email: email,
+        password: password,
+        password_confirmation: passwordConfirmation,
+      }
+    });
   }
 
 });
