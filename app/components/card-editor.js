@@ -13,7 +13,6 @@ export default Ember.Component.extend({
       let front = card.get('front');
       let back = card.get('back');
       if (Ember.isEmpty(front) && Ember.isEmpty(back)){
-        alert('Front or back must be filled in');
         return;
       }
       this.sendAction('saveCard', card);
