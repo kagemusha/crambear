@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kagemusha/crambear.png)](https://travis-ci.org/kagemusha/crambear)
+
 *** WIP ***
 
 # A non-trivial Ember tutorial app
