@@ -7,21 +7,12 @@ moduleForComponent('autosave-input', 'Integration | Component | autosave input',
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  let value='莫名其妙';
+  this.set('value', value);
+  this.render(hbs`{{autosave-input value=value}}`);
+  assert.equal(this.$('input').val(), value);
 
-  this.render(hbs`{{autosave-input}}`);
-
-  assert.equal(this.$().text(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#autosave-input}}
-      template block text
-    {{/autosave-input}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  // todo: Handle any actions with this.on('myAction', function(val) { ... });
 });
