@@ -10,21 +10,13 @@ export default Ember.Component.extend({
       return;
     }
     card.set('isBeingEdited', true);
-    console.log("edit card");
   },
   actions: {
     deleteCard(card){
-      card.deleteRecord();
-      card.save();
+      card.destroyRecord();
     },
-    saveCard(){
-      let card = this.get('card');
-      card.save().then((card)=>{
-        card.set('isBeingEdited', false);
-      }).catch(()=>{
-        //TODO: don't show until created
-        card.rollback();
-      });
+    saveCard(card){
+      this.sendAction('saveCard', card);
     },
   }
 });

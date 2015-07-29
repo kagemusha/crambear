@@ -1,6 +1,6 @@
 {{#if card.belongsToCurrentUser}}
   {{card-editor saveCard='saveCard' card=card}}
-  {{md-btn buttonType='floating' class='delete-card-button btn-small' action="deleteCard" actionArg=card icon='mdi-action-delete'}}
+    {{md-btn buttonType='floating' class='delete-card-button btn-small' action="deleteCard" actionArg=card icon='mdi-action-delete'}}
 {{else}}
   <div class="card-front">
     {{card.front}}

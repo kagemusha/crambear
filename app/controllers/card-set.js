@@ -1,29 +1,21 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  userService: Ember.inject.service(),
-  currentUser: Ember.computed.readOnly("userService.currentUser"),
-  showCardEditor: false,
-  card: null,
-
   actions: {
     addCard(){
-      let newCard = this.store.createRecord("card", {
-        isBeingEdited: true,
+      this.store.createRecord("card", {
+        cardSet: this.get('model'),
       });
-      this.set('card', newCard);
-      this.toggleProperty('showCardEditor');
     },
-    saveNewCard(){
-      let card = this.get('card');
-      card.set('cardSet', this.get('model'));
+    saveCard(card){
+      let wasNewCard =  card.get('isNew');
       card.save().then((card)=>{
         card.set('isBeingEdited', false);
-        let newCard = this.store.createRecord("card", {
-          isBeingEdited: true,
-        });
-        this.set('card', newCard);
-      }).catch(()=>{
+        if (wasNewCard){
+          this.store.createRecord('card', {cardSet: this.get('model')});
+        }
+      }).catch((error)=>{
+        Ember.Logger.log(`Error saving card: ${error}`);
         //TODO: don't show until created
         card.rollback();
       });

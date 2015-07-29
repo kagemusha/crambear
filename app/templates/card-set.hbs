@@ -1,28 +1,5 @@
-
-<div id="card-list-section">
-  <h2 id="card-set-name">
-    {{#if model.belongsToCurrentUser}}
-      {{autosave-input
-      controlId="cardset-name-input"
-      value=model.name
-      label="Name"
-      }}
-    {{else}}
-      {{model.name}}
-    {{/if}}
-  </h2>
-  <span class="sub-header">
-    {{model.cards.length}} cards
-    {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="addCard" icon='mdi-content-add'}}
-  </span>
-  {{link-to "Study" 'study' model class='btn action-button'}}
-  {{#if showCardEditor}}
-    {{card-editor saveCard='saveNewCard' card=card}}
-  {{/if}}
-
-  <ul id="card-list">
-    {{#each model.cards as |card| }}
-      {{card-item card=card deleteCard='deleteCard'}}
-    {{/each}}
-  </ul>
-</div>
+{{card-set
+  cardSet=model
+  addCard='addCard'
+  saveCard='saveCard'
+}}
