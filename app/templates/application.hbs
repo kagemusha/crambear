@@ -6,10 +6,10 @@
 
 {{#if showCardSetCreateModal}}
   {{#create-card-set-modal
-  alignmentTarget=createSetModalOffsetTarget
-  alignment='right'
-  close='toggleModal'
-  doSomething='createCardSet'
+    alignmentTarget=createSetModalOffsetTarget
+    alignment='right'
+    close='toggleModal'
+    doSomething='createCardSet'
   }}
     <label>Name</label>
     {{input class='card-set-name' value=newCardSetName placeholder='name'}}
