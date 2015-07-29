@@ -22,6 +22,12 @@
     {{#link-to "card-set" set}}{{set.cardCount}} {{/link-to}}
   {{/md-table-col}}
 
+    {{#md-table-col row=set key='actions' header='Study!'}}
+      {{#unless set.isEmpty}}
+        {{md-btn action='study' buttonType='floating' class='btn-tiny' actionArg=set icon='mdi-av-play-arrow' }}
+      {{/unless}}
+    {{/md-table-col}}
+
   {{#md-table-col row=set key='actions' header=''}}
     {{#if set.belongsToCurrentUser}}
       {{md-btn action='deleteCardSet' buttonType='floating' class='btn-tiny' actionArg=set icon='mdi-action-delete' }}
