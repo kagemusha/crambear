@@ -29,36 +29,4 @@ export default Ember.Component.extend({
       this.sendAction('save');
     }
   }
-  //controlId: function() {
-  //  if(!this.get('_controlId')) {
-  //    this.set('_controlId', uniqueFormId());
-  //  }
-  //  return this.get('_controlId');
-  //}.property('_controlId'),
-  //valueDidChange: function() {
-  //  this.set('isModified', true);
-  //}.observes('value'),
-  //onSave: function(){
-  //  if(this.get('isModified')){
-  //    this.set('isModified', false);
-  //    this.sendAction('save');
-  //  } else {
-  //    this.sendAction('focusOut');
-  //  }
-  //},
-  //performAutofocus: function() {
-  //  if (this.get('autofocus')) {
-  //    this.$('input,textarea').focus().select();
-  //  }
-  //}.on('didInsertElement'),
-  //actions: {
-  //  save: function(){
-  //    Ember.run.debounce(this, function(){
-  //      this.onSave();
-  //    }, 10);
-  //  },
-  //  focusIn: function (){
-  //    this.sendAction('focusIn');
-  //  }
-  //}
 });
