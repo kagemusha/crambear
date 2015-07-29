@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
         //(could be studying public set
         this.transitionToRoute('/');
       }).catch (()=>{
-        console.log('Logout failed');
+        Ember.Logger.log('Logout failed');
       }).finally(()=>{
         this.set('loggingOut', false);
       });

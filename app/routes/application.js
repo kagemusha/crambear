@@ -8,8 +8,8 @@ export default Ember.Route.extend({
 
   beforeModel() {
     if (!this.get('isLoggedIn')){
-      return this.get('session').fetch('application').catch(()=>{
-        console.log('error');
+      return this.get('session').fetch('application').catch((error)=>{
+        Ember.Logger.log(`Error getting session: ${error}`);
       });
     }
   },

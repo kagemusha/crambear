@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
         this.transitionToRoute('dashboard');
       }).catch((error)=>{
         alert('Registration failed');
-        console.log(`Registration error: ${error}`);
+        Ember.Logger.log(`Registration error: ${error}`);
         //todo: better error handling
       }).finally(()=>{
         this.set('registering', false);

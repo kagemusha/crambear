@@ -5,7 +5,7 @@ const readOnly = Ember.computed.readOnly;
 
 export default Ember.Component.extend({
   onWillInsert: function(){
-    this.get('cardSet.cards').then((cards)=> {
+    this.get('cardSet.cards').then(()=> {
       this.reset();
       this.set('isInitialized', true);
     });
@@ -109,7 +109,6 @@ export default Ember.Component.extend({
     this.set("order", filteredCardIds);
     this.set("filteredTotal", this.order.length);
     this.set("cardsLeft", this.order.length);
-    return console.log("order: " + this.order);
   },
   inFilter: function(card) {
     if (card.get("archived") && !this.get("isShowingArchived")) {
@@ -148,11 +147,9 @@ export default Ember.Component.extend({
     },
     correct: function() {
       this.set("correctCount", this.get("correctCount") + 1);
-      console.log("action correct");
       return this.next();
     },
     wrong: function() {
-      console.log("action wrong");
       return this.next();
     },
     flip: function() {
@@ -160,7 +157,6 @@ export default Ember.Component.extend({
       return this.set("isShowingFront", false);
     },
     toggleArchived: function() {
-      console.log("togArch");
       this.set("isShowingArchived", !this.get("isShowingArchived"));
       return this.reset();
     },
