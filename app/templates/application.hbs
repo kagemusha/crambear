@@ -5,18 +5,14 @@
 </div>
 
 {{#if showCardSetCreateModal}}
-  {{#modal-dialog
-    alignmentTarget="#new-set-button"
-    alignment='right'
-    close='toggleModal'
-    doSomething='createCardSet'
+  {{#create-card-set-modal
+  alignmentTarget=createSetModalOffsetTarget
+  alignment='right'
+  close='toggleModal'
+  doSomething='createCardSet'
   }}
     <label>Name</label>
-    {{input value=newCardSetName placeholder='name'}}
+    {{input class='card-set-name' value=newCardSetName placeholder='name'}}
     {{md-btn text='New Set' action='createCardSet'}}
-  {{/modal-dialog}}
-
-  {!-- ember-cli-materialize modal container --}}
-  {!-- todo: compare with current modal --}}
-  {{!md-modal-container}}
+  {{/create-card-set-modal}}
 {{/if}}

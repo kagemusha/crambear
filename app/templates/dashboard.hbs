@@ -1,7 +1,17 @@
 <h2>
   My Sets
-  {{md-btn id="new-set-button" buttonType='floating' class='btn-small' action="showNewCardSetModal" icon='mdi-content-add'}}
+  {{#unless hasNoSets}}
+    {{md-btn id="new-set-button" buttonType='floating' class='btn-small' action="showNewCardSetModal" icon='mdi-content-add'}}
+  {{/unless}}
 </h2>
+{{#if hasNoSets}}
+  {{md-btn text='Create your first set'
+    id='create-first-set-button'
+    action='showNewCardSetModal'
+    buttonType='large'
+    class='light-blue darken-1'
+  }}
+{{/if}}
 {{#md-table content=model as |set|}}
 
   {{#md-table-col row=set key='name' header='Name'}}

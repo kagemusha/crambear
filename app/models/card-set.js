@@ -18,5 +18,7 @@ export default DS.Model.extend({
   labels: [], //todo: impl labels model as hasMany
   cardCount: Ember.computed.alias("cards.length"),
   name: attr(),
-  public: attr()
+  public: attr(),
+
+  isEmpty: Ember.computed.empty('cards'),
 });

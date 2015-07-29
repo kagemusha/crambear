@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   userService: Ember.inject.service(),
+  currentUser: Ember.computed.readOnly("userService.currentUser"),
   isLoggedIn: Ember.computed.readOnly("userService.isLoggedIn"),
 
 
@@ -22,14 +23,16 @@ export default Ember.Route.extend({
     createCardSet(){
       var name = this.controllerFor('application') .get('newCardSetName');
       if (!Ember.isEmpty(name)){
-        var newSet = this.store.createRecord('card-set', {name: name});
+        //while this is not necessary for the server, which is going to use its current user,
+        //it is necessary for unrefreshed
+        let newSet = this.store.createRecord('card-set', {name: name, user: this.get('currentUser')});
         newSet.save().then((cardSet)=>{
+          this.controllerFor('application') .set('newCardSetName', '');
           this.transitionTo('card-set', cardSet);
         }).catch(()=>{
           alert("new set failed");
         }).finally(()=>{
-          this.controllerFor('application') .set('newCardSetName', '');
-          this.controllerFor('application').toggleProperty('showCardSetCreateModal');
+          this.controllerFor('application').set('showCardSetCreateModal', false);
         });
       }
     },
