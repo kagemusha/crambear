@@ -3,5 +3,18 @@
     <div id="study-set-name">
       {{link-to model.name 'card-set' model}}</div>
   </div>
-  {{study-component cardSet=model}}
+  {{#if model.isEmpty}}
+    <div id=study-status-msg>You don't have any cards to study</div>
+    {{md-btn text='Create some cards'
+      id='create-cares-button'
+      action='gotoCardsetPage'
+      actionArg=model
+      buttonType='large'
+      class='light-blue darken-1'
+    }}
+
+
+  {{else}}
+    {{study-component cardSet=model}}
+  {{/if}}
 </div>
