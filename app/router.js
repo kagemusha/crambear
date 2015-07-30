@@ -10,6 +10,7 @@ Router.map(function() {
   this.route("dashboard",{path: 'dashboard'});
   this.route("card-set", {path: "/card-set/:card_set_id"});
   this.route('study', { path: '/study/:card_set_id' });
+  this.route('notfound', { path: '/*wildcard' });
 });
 
 export default Router;
