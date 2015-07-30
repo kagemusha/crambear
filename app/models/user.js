@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-var attr = DS.attr;
+const attr = DS.attr;
 
 export default DS.Model.extend({
   cardSets: DS.hasMany("card-set", {async: false}),

@@ -1,8 +1,8 @@
-var inMemoryStorage = {};
+let inMemoryStorage = {};
 
 export default {
   isActive: function() {
-    var t = 'test';
+    let t = 'test';
 
     try {
       window.localStorage.setItem(t, t);

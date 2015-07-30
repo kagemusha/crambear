@@ -20,12 +20,12 @@ export default Ember.Controller.extend({
   },
   actions: {
     login(){
-      var email = this.get('email');
-      var password = this.get('password');
+      let email = this.get('email');
+      let password = this.get('password');
       this.get('userService').login(email, password).then(()=>{
         this.transitionToRoute('dashboard');
       }).catch((error)=>{
-        var errorMessage = error;
+        let errorMessage = error;
         // http 401 = "Unauthorized" from jQuery XHR
         if(error === 'Unauthorized') {
           errorMessage = 'Unable to login. Email and/or password incorrect.';

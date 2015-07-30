@@ -73,7 +73,7 @@ export default Ember.Component.extend({
   filters: (function() {
     return this.get('cardSet.labels').map((function(_this) {
       return function(label) {
-        var labelId, selected;
+        let labelId, selected;
         labelId = 1 * label.get("id");
         selected = _this.get('selectedFilterIds').contains(labelId);
         return {
@@ -99,8 +99,8 @@ export default Ember.Component.extend({
     if (Ember.isEmpty(cards)){
       return;
     }
-    var filteredCardIds = [];
-    for (var i=0; i<cards.get('length'); i++){
+    let filteredCardIds = [];
+    for (let i=0; i<cards.get('length'); i++){
       if (this.inFilter(cards.objectAt(i))){
         filteredCardIds.push(i);
       }
@@ -117,12 +117,12 @@ export default Ember.Component.extend({
     if (this.get("selectedFilterIds.length") === 0) {
       return true;
     }
-    var cardLabels = card.get("labelIds");
+    let cardLabels = card.get("labelIds");
     if (!(cardLabels && cardLabels.get("length") > 0)) {
       return false;
     }
-    var selectedFilters = this.get('selectedFilterIds');
-    var includedLabel = selectedFilters.find(function(labelId) {
+    let selectedFilters = this.get('selectedFilterIds');
+    let includedLabel = selectedFilters.find(function(labelId) {
       return cardLabels.contains(1 * labelId);
     });
     return includedLabel != null;
@@ -135,7 +135,7 @@ export default Ember.Component.extend({
     if (this.order.length === 0) {
       return this.set("isFinished", true);
     } else {
-      var cardId = this.order.shift();
+      let cardId = this.order.shift();
       this.set("currentCard", this.get("cards").objectAt(cardId));
       this.set('faceShowing', this.get('currentCard.front'));
       return this.set("cardsLeft", this.order.length + 1);
@@ -162,7 +162,7 @@ export default Ember.Component.extend({
     },
     toggleFilter: function(labelId) {
       labelId *= 1;
-      var lbls = this.get("selectedFilterIds");
+      let lbls = this.get("selectedFilterIds");
       if (lbls.contains(labelId)) {
         lbls.removeObject(labelId);
       } else {

@@ -3,18 +3,18 @@ import ClientStorage from './client-storage';
 
 export function emberAjaxRequest(type, url, data, options) {
   return new Ember.RSVP.Promise(function(resolve, reject){
-    var success = function(response) {
+    let success = function(response) {
       Ember.run(function(){
         resolve(response);
       });
     };
 
-    var error = function(jqxhr, status, error){
+    let error = function(jqxhr, status, error){
       Ember.run(function(){
         reject(error);
       });
     };
-    var requestData = {
+    let requestData = {
       type: type,
       url: url,
       data: data,
@@ -24,7 +24,7 @@ export function emberAjaxRequest(type, url, data, options) {
     };
 
     if (options && options.authBefore === true) {
-      var authToken = ClientStorage.get('authToken');
+      let authToken = ClientStorage.get('authToken');
       requestData.beforeSend = function(xhr) {
         xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
       };

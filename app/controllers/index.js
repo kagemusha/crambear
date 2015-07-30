@@ -10,9 +10,9 @@ export default Ember.Controller.extend({
 
   actions: {
     register(){
-      var email = this.get('email');
-      var password = this.get('password');
-      var passwordConfirmation = this.get('passwordConfirmation');
+      let email = this.get('email');
+      let password = this.get('password');
+      let passwordConfirmation = this.get('passwordConfirmation');
       this.get('userService').register(email, password, passwordConfirmation).then(()=>{
         this.transitionToRoute('dashboard');
       }).catch((error)=>{

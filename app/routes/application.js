@@ -21,7 +21,7 @@ export default Ember.Route.extend({
       this.controllerFor('application').toggleProperty('showCardSetCreateModal');
     },
     createCardSet(){
-      var name = this.controllerFor('application') .get('newCardSetName');
+      let name = this.controllerFor('application') .get('newCardSetName');
       if (!Ember.isEmpty(name)){
         //while this is not necessary for the server, which is going to use its current user,
         //it is necessary for unrefreshed

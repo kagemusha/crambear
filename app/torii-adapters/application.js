@@ -9,36 +9,36 @@ export default Ember.Object.extend({
   currentUser: Ember.computed.alias("userService.currentUser"),
 
   pushUserToStore(userData) {
-    var store = this.get('store');
+    let store = this.get('store');
     store.pushPayload('user', userData);
-    var userId = userData.data.id;
-    var user = store.peekRecord('user', userId);
+    let userId = userData.data.id;
+    let user = store.peekRecord('user', userId);
     this.set('currentUser', user);
     return user;
   },
   open(response) {
-    var user = this.pushUserToStore(response);
+    let user = this.pushUserToStore(response);
     ClientStorage.set('authToken', user.get('authToken'));
     return Ember.RSVP.Promise.resolve({currentUser: user});
   },
   fetch() {
-    var self = this;
+    let self = this;
     return new Ember.RSVP.Promise((resolve, reject)=> {
-      var authToken = ClientStorage.get('authToken');
+      let authToken = ClientStorage.get('authToken');
       if (!authToken) {
         reject("No authToken present");
         return;
       }
 
-      var success = (response)=>{
+      let success = (response)=>{
         Ember.run(()=>{
-          var user = self.pushUserToStore(response);
+          let user = self.pushUserToStore(response);
           ClientStorage.set('authToken', user.get('authToken'));
           resolve({currentUser: user});
         });
       };
 
-      var error = (jqxhr, status, error)=>{
+      let error = (jqxhr, status, error)=>{
         Ember.run(()=>{
           reject(error);
         });
@@ -58,10 +58,10 @@ export default Ember.Object.extend({
   },
   close() {
     return new Ember.RSVP.Promise((resolve, reject)=>{
-      var authToken = ClientStorage.get('authToken');
+      let authToken = ClientStorage.get('authToken');
 
-      var success = ()=> {
-        var store = this.get('store');
+      let success = ()=> {
+        let store = this.get('store');
         store.unloadAll('card-set');
         store.unloadAll('card');
         store.unloadRecord(this.get('currentUser'));
@@ -72,7 +72,7 @@ export default Ember.Object.extend({
         });
       };
 
-      var error = (jqxhr, status, error)=>{
+      let error = (jqxhr, status, error)=>{
         Ember.run(()=>{
           reject(error);
         });
