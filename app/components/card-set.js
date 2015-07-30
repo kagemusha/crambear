@@ -9,6 +9,12 @@ export default Ember.Component.extend({
 
   onWillDestroy: function(){
     let cards = this.get('cardSet.cards');
+
+    //this can happen when logout while on this page
+    if (!cards) {
+      return;
+    }
+
     let newCards = cards.filter((card)=>{
       return card.get('isNew');
     });
