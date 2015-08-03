@@ -3,7 +3,45 @@ import Ember from 'ember';
 
 const readOnly = Ember.computed.readOnly;
 
+/*
+  this is a hash where
+ */
+const Results = Ember.Object.extend({
+  ids: null,
+  results: {},
+  init(){
+    let cards = this.get('cards');
+    this.get('positions').forEach((position)=>{
+      this.get('results')[cards.objectAt(position).get('id')] = 0;
+    });
+  },
+  correct(id){
+    this.get('results')[id]++;
+  },
+  wrong(id, repeat) {
+    if (repeat){
+      this.get('results')[id]++;
+    }
+  },
+  numCorrectOnFirstTry: Ember.computed('results', function(){
+    let correctCount = 0;
+    let results = this.get('results');
+    for (let key in results){
+      if (results[key] === 1){
+        correctCount++;
+      }
+    }
+    return correctCount;
+  }),
+});
+
 export default Ember.Component.extend({
+  randomize: false,
+  repeatWrongs: false,
+  results: null,
+  reorder: function(){
+    this.reset();
+  }.observes('randomize','repeatWrongs'),
   onWillInsert: function(){
     this.get('cardSet.cards').then(()=> {
       this.reset();
@@ -12,7 +50,11 @@ export default Ember.Component.extend({
   }.on('willInsertElement'),
   cards: readOnly("cardSet.cards"),
   cardSetName: readOnly("cardSet.name"),
-  currentCard: null,
+  currentCardPostion: null,
+  currentCard: Ember.computed('currentCardPosition', function(){
+    let position = this.get('currentCardPosition');
+    return this.get('cards').objectAt(position);
+  }),
   front: readOnly("currentCard.front"),
   back: readOnly("currentCard.back"),
   instructions: Ember.computed('isShowingFront', function(){
@@ -26,7 +68,7 @@ export default Ember.Component.extend({
   isShowingBack: (function() {
     return this.get("pageRendered") && !this.get("isShowingFront");
   }).property("isShowingFront", "pageRendered"),
-  correctCount: 0,
+  correctCount: Ember.computed.readOnly("results.numCorrectOnFirstTry"),
   cardsLeft: 0,
   isFinished: false,
   order: [],
@@ -87,7 +129,6 @@ export default Ember.Component.extend({
 
   reset: function() {
     this.set("isFinished", false);
-    this.set("correctCount", 0);
     this.initLabels();
     this.orderCards();
     this.next();
@@ -99,16 +140,20 @@ export default Ember.Component.extend({
     if (Ember.isEmpty(cards)){
       return;
     }
-    let filteredCardIds = [];
+    let filteredCardPositions = [];
     for (let i=0; i<cards.get('length'); i++){
       if (this.inFilter(cards.objectAt(i))){
-        filteredCardIds.push(i);
+        filteredCardPositions.push(i);
       }
     }
-    filteredCardIds = _.shuffle(filteredCardIds);
-    this.set("order", filteredCardIds);
-    this.set("filteredTotal", this.order.length);
-    this.set("cardsLeft", this.order.length);
+    this.set('results', Results.create({positions: filteredCardPositions, cards: cards}));
+    if (this.get('randomize')) {
+      filteredCardPositions = _.shuffle(filteredCardPositions);
+    }
+    this.set("order", filteredCardPositions);
+    let order = this.get('order');
+    this.set("filteredTotal", order.length);
+    this.set("cardsLeft", order.length);
   },
   inFilter: function(card) {
     if (card.get("archived") && !this.get("isShowingArchived")) {
@@ -132,24 +177,42 @@ export default Ember.Component.extend({
   },
   next: function() {
     this.set("isShowingFront", true);
-    if (this.order.length === 0) {
+    let order = this.get('order');
+    if (order.length === 0) {
       return this.set("isFinished", true);
     } else {
-      let cardId = this.order.shift();
-      this.set("currentCard", this.get("cards").objectAt(cardId));
+      let nextCardPosition = order.shift();
+      this.set("currentCardPosition", nextCardPosition);
       this.set('faceShowing', this.get('currentCard.front'));
-      return this.set("cardsLeft", this.order.length + 1);
+      return this.set("cardsLeft", order.length + 1);
+    }
+  },
+  reAddCurrentCard() {
+    let order = this.get('order');
+    let remainingCount = order.get('length');
+    let currentCardPosition = this.get('currentCardPosition');
+    if (this.get('randomize')) {
+      let newPosition = Math.floor(Math.random() * remainingCount);
+      order.splice(newPosition, 0, currentCardPosition);
+    } else {
+      order.push(currentCardPosition);
     }
   },
   actions: {
     restart: function(){
       this.reset();
     },
-    correct: function() {
-      this.set("correctCount", this.get("correctCount") + 1);
+    correct() {
+      let currentId = this.get('currentCard.id');
+      this.get('results').correct(currentId);
       return this.next();
     },
-    wrong: function() {
+    wrong() {
+      if (this.get('repeatWrongs')){
+        this.reAddCurrentCard();
+      }
+      let currentId = this.get('currentCard.id');
+      this.get('results').wrong(currentId, this.get('repeatWrongs'));
       return this.next();
     },
     flip: function() {

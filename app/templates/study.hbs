@@ -1,7 +1,6 @@
 <div id="study-page">
-  <div id="study-btn-bar">
-    <div id="study-set-name">
-      {{link-to model.name 'card-set' model}}</div>
+  <div id="study-set-name">
+    {{link-to model.name 'card-set' model}}
   </div>
   {{#if model.isEmpty}}
     <div id=study-status-msg>You don't have any cards to study</div>
@@ -12,8 +11,6 @@
       buttonType='large'
       class='light-blue darken-1'
     }}
-
-
   {{else}}
     {{study-component cardSet=model}}
   {{/if}}
