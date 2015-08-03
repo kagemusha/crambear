@@ -1,5 +1,6 @@
 /* global _ */
 import Ember from 'ember';
+import ClientStorage from 'crambear/util/client-storage';
 
 const readOnly = Ember.computed.readOnly;
 
@@ -39,11 +40,27 @@ export default Ember.Component.extend({
   randomize: false,
   repeatWrongs: false,
   results: null,
-  reorder: function(){
+  setKey: Ember.computed('cardSet', function(){
+    return `set-settings-${this.get('cardSet.id')}`;
+  }),
+  settingsChanged: function(){
+    let settings = {
+      randomize: this.get('randomize'),
+      repeatWrongs: this.get('repeatWrongs')
+    };
+    ClientStorage.set(this.get('setKey'), settings);
     this.reset();
   }.observes('randomize','repeatWrongs'),
+  getSettings(){
+    let settings = ClientStorage.get(this.get('setKey'));
+    if (settings) {
+      this.set('randomize', settings.randomize);
+      this.set('repeatWrongs', settings.repeatWrongs);
+    }
+  },
   onWillInsert: function(){
     this.get('cardSet.cards').then(()=> {
+      this.getSettings();
       this.reset();
       this.set('isInitialized', true);
     });
