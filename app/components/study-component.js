@@ -100,16 +100,12 @@ export default Ember.Component.extend({
       Ember.$('#study-buttons').css('left', `${x}px`);
     }
   },
-  total: (function() {
-    if (this.get("cards")) {
-      return this.get("cards.length");
-    } else {
-      return 0;
-    }
-  }).property("cards"),
-  statusMsg: (function() {
-    return "" + (this.get('cardsLeft')) + " of " + (this.get('filteredTotal')) + " left";
-  }).property("cardsLeft", "filteredTotal"),
+  total: Ember.computed('cards', function() {
+    return this.get("cards.length") || 0;
+  }),
+  statusMsg: Ember.computed('cardsLeft', 'filteredTotal', function() {
+    return `${this.get('cardsLeft')}  of ${this.get('filteredTotal')} left`;
+  }),
   cardSetLabels: readOnly("cardSet.labels"),
   selectedFilterIds: Ember.A(),
   filters: (function() {
@@ -127,7 +123,7 @@ export default Ember.Component.extend({
     })(this));
   }).property("selectedFilterIds.@each"),
 
-  reset: function() {
+  reset() {
     this.set("isFinished", false);
     this.initLabels();
     this.orderCards();
@@ -135,7 +131,7 @@ export default Ember.Component.extend({
     return this.set("pageRendered", true);
   },
 
-  orderCards: function() {
+  orderCards() {
     let cards = this.get('cards');
     if (Ember.isEmpty(cards)){
       return;
@@ -155,7 +151,7 @@ export default Ember.Component.extend({
     this.set("filteredTotal", order.length);
     this.set("cardsLeft", order.length);
   },
-  inFilter: function(card) {
+  inFilter(card) {
     if (card.get("archived") && !this.get("isShowingArchived")) {
       return false;
     }
@@ -172,10 +168,10 @@ export default Ember.Component.extend({
     });
     return includedLabel != null;
   },
-  initLabels: function() {
+  initLabels() {
     return Ember.K();
   },
-  next: function() {
+  next() {
     this.set("isShowingFront", true);
     let order = this.get('order');
     if (order.length === 0) {
@@ -199,7 +195,7 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    restart: function(){
+    restart(){
       this.reset();
     },
     correct() {
@@ -215,15 +211,15 @@ export default Ember.Component.extend({
       this.get('results').wrong(currentId, this.get('repeatWrongs'));
       return this.next();
     },
-    flip: function() {
+    flip() {
       this.set('faceShowing', this.get('currentCard.back'));
       return this.set("isShowingFront", false);
     },
-    toggleArchived: function() {
+    toggleArchived() {
       this.set("isShowingArchived", !this.get("isShowingArchived"));
       return this.reset();
     },
-    toggleFilter: function(labelId) {
+    toggleFilter(labelId) {
       labelId *= 1;
       let lbls = this.get("selectedFilterIds");
       if (lbls.contains(labelId)) {
