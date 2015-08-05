@@ -12,7 +12,11 @@ $study-elem-width: 800px;
 #study-options {
   margin-bottom: 20px;
   .materialize-checkbox {
+    margin-right: 10px;
     display: inline-block;
+    [type="checkbox"] + label {
+      padding-left: 24px;
+    }
   }
 }
 
