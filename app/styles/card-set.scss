@@ -1,0 +1,33 @@
+.card-editor-field {
+  width: 100%;
+}
+
+#card-labels{
+  margin-bottom: 10px;
+}
+.card-editor {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  textarea {
+    background: white;
+    height: 6rem;
+  }
+}
+
+.label-editor {
+  display: inline-block;
+  background: lavender;
+  padding: 1px 2px;
+  margin-bottom: 6px;
+  input[type=text] {
+    height: 1.5rem;
+    width: 140px;
+    margin: 0;
+  }
+}
+
+.label-input {
+  display: inline;
+}
