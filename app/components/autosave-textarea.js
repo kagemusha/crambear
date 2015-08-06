@@ -1,25 +1,5 @@
 import Ember from 'ember';
+import AutosaveField from 'crambear/mixins/autosave-field';
 
-export default Ember.Component.extend({
-  tagName: 'div',
-  classNames: ['card-editor-field'],
-  initialVal: null,
-  onInit: function(){
-    this.set('initialVal', this.get('value'));
-  }.on('didInsertElement'),
-  focusOut(){
-    this.autosave();
-  },
-  keyDown: function(e) {
-    switch(e.keyCode) {
-      case 13:
-        this.autosave();
-        break;
-    }
-  },
-  autosave(){
-    if (this.get('value') !== this.get('initialVal')){
-      this.sendAction('save');
-    }
-  }
-});
+export default Ember.Component.extend(AutosaveField);
+

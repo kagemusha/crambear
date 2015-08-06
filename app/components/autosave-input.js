@@ -1,4 +1,5 @@
-import MDInput from 'ember-cli-materialize/components/md-input';
+import Ember from 'ember';
+import AutosaveField from 'crambear/mixins/autosave-field';
 
-export default MDInput.extend({
-});
+export default Ember.Component.extend(AutosaveField);
+
