@@ -20,5 +20,30 @@ export default Ember.Controller.extend({
         card.rollback();
       });
     },
+    saveNewLabel(name){
+      if (Ember.isBlank(name)){
+        return;
+      }
+      let label = this.store.createRecord('label', {
+        name: name,
+        cardSet: this.get('model'),
+      });
+      this.send('saveLabel', label);
+    },
+    saveLabel(label){
+      if (Ember.isBlank(label.get('name'))) {
+        return;
+      }
+      label.save().then(()=>{
+        this.set('newLabelName', null);
+      }).catch(()=>{
+        alert('Error saving label');
+      });
+    },
+    deleteLabel(label){
+      label.destroyRecord().catch(()=>{
+        alert('Delete label failed');
+      });
+    }
   }
 });

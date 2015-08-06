@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  classNames: ['card-editor-field'],
   initialVal: null,
   onInit: function(){
     this.set('initialVal', this.get('value'));

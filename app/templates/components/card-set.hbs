@@ -3,14 +3,30 @@
   <h2 id="card-set-name">
     {{#if cardSet.belongsToCurrentUser}}
       {{autosave-input
-      controlId="cardset-name-input"
-      value=cardSet.name
-      label="Name"
+        controlId="cardset-name-input"
+        value=cardSet.name
+        label="Name"
+        save='saveNewLabel'
       }}
     {{else}}
       {{cardSet.name}}
     {{/if}}
   </h2>
+  <div id="card-labels">
+    <span id="label-list">
+      Labels
+      {{md-btn id="show-new-label-modal" buttonType='floating' class='btn-tiny' action="showNewLabelModal" icon='mdi-content-add'}}
+    </span>
+    <ul>
+      {{#each cardSet.labels as |label| }}
+        {{label-field
+            label=label
+            save='saveLabel'
+            delete='deleteLabel'
+        }}
+      {{/each}}
+    </ul>
+  </div>
   <span class="sub-header">
     {{cardSet.cardCount}} cards
     {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="addCard" icon='mdi-content-add'}}
@@ -29,3 +45,15 @@
     {{/each}}
   </ul>
 </div>
+
+{{#if shouldShowNewLabelModal}}
+  {{#modal-dialog
+    alignmentTarget='#show-new-label-modal'
+    alignment='right'
+    close='closeModal'
+  }}
+    <label>Name</label>
+    {{input class='label-name' value=newLabelName placeholder='name'}}
+    {{md-btn text='New Label' action='saveNewLabel'}}
+  {{/modal-dialog}}
+{{/if}}
