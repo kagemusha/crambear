@@ -11,8 +11,12 @@
   flex-direction: row;
   justify-content: space-between;
   textarea {
+    padding: 5px;
     background: white;
     height: 6rem;
+    &:focus {
+      background: #fbfcbf;
+    }
   }
 }
 
