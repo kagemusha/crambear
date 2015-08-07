@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  cardSet: DS.belongsTo('card-set'),
+  cardSet: DS.belongsTo('card-set', { async: false }),
   name: DS.attr(),
 });

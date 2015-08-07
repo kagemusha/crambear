@@ -13,7 +13,7 @@ export default DS.Model.extend({
     return this.get('currentUser') === this.get('user');
   }),
 
-  user: DS.belongsTo("user"),
+  user: DS.belongsTo("user", { async: false }),
   cards: DS.hasMany("card", {async: true}),
   labels: DS.hasMany("label", {async: true}),
   cardCount: Ember.computed('cards.@each', function(){
