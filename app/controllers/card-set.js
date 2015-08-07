@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     addCard() {
-      this.store.createRecord("card", {
+      this.store.createRecord('card', {
         cardSet: this.get('model'),
       });
     },
