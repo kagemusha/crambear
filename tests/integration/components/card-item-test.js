@@ -1,6 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Models from '../models';
 
 
 moduleForComponent('card-item', 'Integration | Component | card item', {

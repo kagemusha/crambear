@@ -1,5 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { moduleForComponent } from 'ember-qunit';
 
 
 moduleForComponent('create-card-set-modal', 'Integration | Component | create card set modal', {
