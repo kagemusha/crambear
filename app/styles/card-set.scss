@@ -1,3 +1,23 @@
+#card-list-section{
+  margin-left: 40px;
+}
+
+ul#card-list {
+  li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: black 1px solid;
+    border-radius: 6px;
+    background: lightblue;
+    padding: 6px;
+    margin-bottom: 10px;
+  }
+  .card-front {
+    font-weight: bold;
+  }
+}
+
 .card-editor-field {
   width: 100%;
 }
