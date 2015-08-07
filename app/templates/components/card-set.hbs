@@ -1,9 +1,12 @@
 
 <div id="card-list-section">
   <h2 id="card-set-name">
+    {{#unless cardSet.isEmpty}}
+      {{md-btn buttonType='floating' class='btn-small red' action='study' actionArg=cardSet icon='mdi-av-play-arrow' }}
+    {{/unless}}
     {{#if cardSet.belongsToCurrentUser}}
       {{autosave-input
-        controlId="cardset-name-input"
+        id='card-set-name-input'
         value=cardSet.name
         label="Name"
         save='saveNewLabel'
@@ -28,12 +31,9 @@
     </ul>
   </div>
   <span class="sub-header">
-    {{cardSet.cardCount}} cards
+    Cards ({{cardSet.cardCount}})
     {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="addCard" icon='mdi-content-add'}}
   </span>
-  {{#unless cardSet.isEmpty}}
-    {{link-to "Study" 'study' cardSet class='btn action-button' }}
-  {{/unless}}
 
   <ul id="card-list">
     {{#each cardSet.cards as |card| }}

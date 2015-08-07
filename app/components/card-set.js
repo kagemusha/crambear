@@ -49,6 +49,9 @@ export default Ember.Component.extend({
     },
     closeModal(){
       this.set('shouldShowNewLabelModal', false);
+    },
+    study(){
+      this.sendAction('study', this.get('cardSet'));
     }
   }
 });

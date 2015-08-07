@@ -44,6 +44,9 @@ export default Ember.Controller.extend({
       label.destroyRecord().catch(()=>{
         alert('Delete label failed');
       });
+    },
+    study(set){
+      this.transitionTo('study', set);
     }
   }
 });
