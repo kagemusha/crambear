@@ -3,13 +3,13 @@ import ModalDialog from 'ember-modal-dialog/components/modal-dialog';
 
 export default ModalDialog.extend({
 
-  focus: function(){
+  focus: Ember.on('didInsertElement', function(){
     let focusSelector = this.get('focusSelector');
     if (this.get('focusSelector')){
       Ember.$(focusSelector).focus();
     }
-  }.on('didInsertElement'),
-  setup: function() {
+  }),
+  setup: Ember.on('didInsertElement', function() {
     Ember.$('body').on('keydown.modal-dialog', (e) => {
       if (e.keyCode === 27) {
         this.sendAction('close');
@@ -18,9 +18,9 @@ export default ModalDialog.extend({
         this.sendAction('doSomething');
       }
     });
-  }.on('didInsertElement'),
+  }),
 
-  teardown: function() {
+  teardown: Ember.on('willDestroyElement', function() {
     Ember.$('body').off('keyup.modal-dialog');
-  }.on('willDestroyElement'),
+  }),
 });

@@ -2,10 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   initialVal: null,
-  onInit: function(){
+  onInit: Ember.on('didInsertElement', function(){
     this.set('initialVal', this.get('value'));
-  }.on('didInsertElement'),
-  focusOut(){
+  }),
+  focusOut() {
     this.autosave();
   },
   keyDown: function(e) {
@@ -15,7 +15,7 @@ export default Ember.Mixin.create({
         break;
     }
   },
-  autosave(){
+  autosave() {
     if (this.get('value') !== this.get('initialVal')){
       this.sendAction('save');
     }

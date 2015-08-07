@@ -8,7 +8,7 @@ export default Ember.Route.extend(CardSetNotFound, {
   },
 
   actions: {
-    gotoCardsetPage(cardSet){
+    gotoCardsetPage(cardSet) {
       this.transitionTo('card-set', cardSet );
     }
   }

@@ -4,12 +4,12 @@ export default Ember.Component.extend({
   shouldShowNewLabelModal: false,
   newLabelName: null,
   cardSet: null,
-  onInserted: function(){
+  onInserted: Ember.on('didInsertElement', function(){
     let cardSet = this.get('cardSet');
     cardSet.get('store').createRecord('card', {cardSet: cardSet});
-  }.on('didInsertElement'),
+  }),
 
-  onWillDestroy: function(){
+  onWillDestroy: Ember.on('willDestroyElement', function(){
     let cards = this.get('cardSet.cards');
 
     //this can happen when logout while on this page
@@ -23,34 +23,34 @@ export default Ember.Component.extend({
     newCards.forEach((card)=>{
       card.unloadRecord();
     });
-  }.on('willDestroyElement'),
+  }),
 
   actions: {
-    addCard(){
+    addCard() {
       this.sendAction('addCard');
     },
-    saveCard(card){
+    saveCard(card) {
       this.sendAction('saveCard', card);
     },
-    showNewLabelModal(){
+    showNewLabelModal() {
       this.set('shouldShowNewLabelModal', true);
     },
-    saveLabel(label){
+    saveLabel(label) {
       this.sendAction('saveLabel', label);
     },
-    deleteLabel(label){
+    deleteLabel(label) {
       this.sendAction('deleteLabel', label);
     },
-    saveNewLabel(){
+    saveNewLabel() {
       let name = this.get('newLabelName');
       this.sendAction('saveNewLabel', name);
       this.set('newLabelName', null);
       this.set('shouldShowNewLabelModal', false);
     },
-    closeModal(){
+    closeModal() {
       this.set('shouldShowNewLabelModal', false);
     },
-    study(){
+    study() {
       this.sendAction('study', this.get('cardSet'));
     }
   }

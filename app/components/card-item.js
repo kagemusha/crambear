@@ -12,10 +12,10 @@ export default Ember.Component.extend({
     card.set('isBeingEdited', true);
   },
   actions: {
-    deleteCard(card){
+    deleteCard(card) {
       card.destroyRecord();
     },
-    saveCard(card){
+    saveCard(card) {
       this.sendAction('saveCard', card);
     },
   }

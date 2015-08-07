@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    addCard(){
+    addCard() {
       this.store.createRecord("card", {
         cardSet: this.get('model'),
       });
     },
-    saveCard(card){
+    saveCard(card) {
       let wasNewCard =  card.get('isNew');
       card.save().then((card)=>{
         card.set('isBeingEdited', false);
@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
         card.rollback();
       });
     },
-    saveNewLabel(name){
+    saveNewLabel(name) {
       if (Ember.isBlank(name)){
         return;
       }
@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
       });
       this.send('saveLabel', label);
     },
-    saveLabel(label){
+    saveLabel(label) {
       if (Ember.isBlank(label.get('name'))) {
         return;
       }
@@ -40,12 +40,12 @@ export default Ember.Controller.extend({
         alert('Error saving label');
       });
     },
-    deleteLabel(label){
+    deleteLabel(label) {
       label.destroyRecord().catch(()=>{
         alert('Delete label failed');
       });
     },
-    study(set){
+    study(set) {
       this.transitionTo('study', set);
     }
   }

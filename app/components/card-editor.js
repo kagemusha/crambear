@@ -4,11 +4,11 @@ export default Ember.Component.extend({
   card: null,
   classNames: ['card-editor'],
   actions: {
-    hideCardEditor(){
+    hideCardEditor() {
       this.set('card.isBeingEdited', false);
       this.sendAction('hideCardEditor');
     },
-    saveCard(){
+    saveCard() {
       let card = this.get('card');
       let front = card.get('front');
       let back = card.get('back');

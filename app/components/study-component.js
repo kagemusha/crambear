@@ -10,13 +10,13 @@ const readOnly = Ember.computed.readOnly;
 const Results = Ember.Object.extend({
   ids: null,
   results: {},
-  init(){
+  init() {
     let cards = this.get('cards');
     this.get('positions').forEach((position)=>{
       this.get('results')[cards.objectAt(position).get('id')] = 0;
     });
   },
-  correct(id){
+  correct(id) {
     this.get('results')[id]++;
   },
   wrong(id, repeat) {
@@ -43,28 +43,28 @@ export default Ember.Component.extend({
   setKey: Ember.computed('cardSet', function(){
     return `set-settings-${this.get('cardSet.id')}`;
   }),
-  settingsChanged: function(){
+  settingsChanged: Ember.observer('randomize', 'repeatWrongs', function(){
     let settings = {
       randomize: this.get('randomize'),
       repeatWrongs: this.get('repeatWrongs')
     };
     ClientStorage.set(this.get('setKey'), settings);
     this.reset();
-  }.observes('randomize','repeatWrongs'),
-  getSettings(){
+  }),
+  getSettings() {
     let settings = ClientStorage.get(this.get('setKey'));
     if (settings) {
       this.set('randomize', settings.randomize);
       this.set('repeatWrongs', settings.repeatWrongs);
     }
   },
-  onWillInsert: function(){
+  onWillInsert: Ember.on('willInsertElement', function(){
     this.get('cardSet.cards').then(()=> {
       this.getSettings();
       this.reset();
       this.set('isInitialized', true);
     });
-  }.on('willInsertElement'),
+  }),
   cards: readOnly("cardSet.cards"),
   cardSetName: readOnly("cardSet.name"),
   currentCardPostion: null,
@@ -82,9 +82,9 @@ export default Ember.Component.extend({
   isInitialized: false,
   isShowingArchived: false,
   isShowingFront: true,
-  isShowingBack: (function() {
+  isShowingBack: Ember.computed("isShowingFront", "pageRendered", function() {
     return this.get("pageRendered") && !this.get("isShowingFront");
-  }).property("isShowingFront", "pageRendered"),
+  }),
   correctCount: Ember.computed.readOnly("results.numCorrectOnFirstTry"),
   cardsLeft: 0,
   isFinished: false,
@@ -99,7 +99,7 @@ export default Ember.Component.extend({
     }
     return `${Math.round(100 * this.get('correctCount')/total)}%`;
   }),
-  click(event){
+  click(event) {
     if (event.target.id === 'card-panel'){
       this.send('flip');
       let cardPanel = Ember.$('#card-panel');
@@ -125,7 +125,7 @@ export default Ember.Component.extend({
   }),
   cardSetLabels: readOnly("cardSet.labels"),
   selectedFilterIds: Ember.A(),
-  filters: (function() {
+  filters: Ember.computed("selectedFilterIds.@each", function() {
     return this.get('cardSet.labels').map((function(_this) {
       return function(label) {
         let labelId, selected;
@@ -138,7 +138,7 @@ export default Ember.Component.extend({
         };
       };
     })(this));
-  }).property("selectedFilterIds.@each"),
+  }),
 
   reset() {
     this.set("isFinished", false);
@@ -212,7 +212,7 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    restart(){
+    restart() {
       this.reset();
     },
     correct() {

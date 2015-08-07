@@ -6,10 +6,10 @@ export default Ember.Component.extend({
 
   label: null,
   actions: {
-    save(){
+    save() {
       this.sendAction('save', this.get('label'));
     },
-    delete(){
+    delete() {
       this.sendAction('delete', this.get('label'));
     }
   }

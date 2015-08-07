@@ -10,16 +10,16 @@ export default Ember.Controller.extend({
   isLoggedIn: Ember.computed.readOnly('userService.isLoggedIn'),
   showCardSetCreateModal: false,
   newCardSetName: "", //set in modal
-  onSessionStatusChange: function(){
+  onSessionStatusChange: Ember.on('init', Ember.observer('isLoggedIn', function(){
     this.transitionAway();
-  }.observes('isLoggedIn').on('init'),
-  transitionAway(){
+  })),
+  transitionAway() {
     if (!this.get('userService.isLoggedIn')){
       this.transitionToRoute('index');
     }
   },
   actions: {
-    login(){
+    login() {
       let email = this.get('email');
       let password = this.get('password');
       this.get('userService').login(email, password).then(()=>{
@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
       });
     },
 
-    logout(){
+    logout() {
       if(this.get('loggingOut')) { return; }
       this.set('loggingOut', true);
 

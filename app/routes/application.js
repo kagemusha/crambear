@@ -14,13 +14,13 @@ export default Ember.Route.extend({
     }
   },
   actions: {
-    showNewCardSetModal(){
+    showNewCardSetModal() {
       this.controllerFor('application').toggleProperty('showCardSetCreateModal');
     },
-    toggleModal(){
+    toggleModal() {
       this.controllerFor('application').toggleProperty('showCardSetCreateModal');
     },
-    createCardSet(){
+    createCardSet() {
       let name = this.controllerFor('application') .get('newCardSetName');
       if (!Ember.isEmpty(name)){
         //while this is not necessary for the server, which is going to use its current user,
@@ -36,7 +36,7 @@ export default Ember.Route.extend({
         });
       }
     },
-    deleteCardSet(set){
+    deleteCardSet(set) {
       set.deleteRecord();
       set.save().catch(()=>{
         alert('error deleting set');

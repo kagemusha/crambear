@@ -6,12 +6,12 @@ const attr = DS.attr;
 export default DS.Model.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.readOnly('userService.currentUser'),
-  belongsToCurrentUser: function(){
+  belongsToCurrentUser: Ember.computed('currentUser', 'user', function(){
     if (!this.get('currentUser')){
       return false;
     }
     return this.get('currentUser') === this.get('user');
-  }.property('currentUser', 'user'),
+  }),
 
   user: DS.belongsTo("user"),
   cards: DS.hasMany("card", {async: true}),

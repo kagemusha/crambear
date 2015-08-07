@@ -4,10 +4,10 @@ export default Ember.Route.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.readOnly("userService.currentUser"),
 
-  onActivate: function(){
+  onActivate: Ember.on("activate", function(){
     this.transitionAway();
-  }.on("activate"),
-  transitionAway(){
+  }),
+  transitionAway() {
     if (!this.get('userService.isLoggedIn')){
       this.transitionTo('/');
     }
@@ -18,7 +18,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    study(set){
+    study(set) {
       this.transitionTo('study', set);
     }
   }
