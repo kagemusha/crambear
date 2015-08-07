@@ -32,14 +32,13 @@
   </div>
   <span class="sub-header">
     Cards ({{cardSet.cardCount}})
-    {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="addCard" icon='mdi-content-add'}}
+    {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="gotoNewCard" icon='mdi-content-add'}}
   </span>
 
   <ul id="card-list">
     {{#each cardSet.cards as |card| }}
       {{card-item
         card=card
-        addCard='addCard'
         saveCard='saveCard'
       }}
     {{/each}}

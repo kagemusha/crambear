@@ -2,11 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    addCard() {
-      this.store.createRecord('card', {
-        cardSet: this.get('model'),
-      });
-    },
     saveCard(card) {
       let wasNewCard =  card.get('isNew');
       card.save().then((card)=>{

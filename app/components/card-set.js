@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const NEW_CARD_FRONT_SELECTOR = 'ul li:last textarea:first';
 
 export default Ember.Component.extend({
   shouldShowNewLabelModal: false,
@@ -26,8 +27,8 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    addCard() {
-      this.sendAction('addCard');
+    gotoNewCard() {
+      this.$(NEW_CARD_FRONT_SELECTOR).focus();
     },
     saveCard(card) {
       this.sendAction('saveCard', card);
