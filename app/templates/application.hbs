@@ -5,14 +5,15 @@
 </div>
 
 {{#if showCardSetCreateModal}}
-  {{#create-card-set-modal
+  {{#modal-dialog
     alignmentTarget=createSetModalOffsetTarget
     alignment='right'
+    focusSelector='.card-set-name'
     close='toggleModal'
     doSomething='createCardSet'
   }}
     <label>Name</label>
     {{input class='card-set-name' value=newCardSetName placeholder='name'}}
     {{md-btn text='New Set' action='createCardSet'}}
-  {{/create-card-set-modal}}
+  {{/modal-dialog}}
 {{/if}}
