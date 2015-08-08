@@ -6,6 +6,9 @@ export default {
     cards: [
       {front: '信玄', back: '武田'},
       {front: '谦信', back: '上杉'},
-     ]
+     ],
+    tags: [
+      {name: 'archived'}
+    ]
   }
 };
