@@ -2,8 +2,8 @@ import Ember from 'ember';
 const NEW_CARD_FRONT_SELECTOR = 'ul li:last textarea:first';
 
 export default Ember.Component.extend({
-  shouldShowNewLabelModal: false,
-  newLabelName: null,
+  shouldShowNewTagModal: false,
+  newTagName: null,
   cardSet: null,
   onInserted: Ember.on('didInsertElement', function(){
     let cardSet = this.get('cardSet');
@@ -33,23 +33,23 @@ export default Ember.Component.extend({
     saveCard(card) {
       this.sendAction('saveCard', card);
     },
-    showNewLabelModal() {
-      this.set('shouldShowNewLabelModal', true);
+    showNewTagModal() {
+      this.set('shouldShowNewTagModal', true);
     },
-    saveLabel(label) {
-      this.sendAction('saveLabel', label);
+    saveTag(tag) {
+      this.sendAction('saveTag', tag);
     },
-    deleteLabel(label) {
-      this.sendAction('deleteLabel', label);
+    deleteTag(tag) {
+      this.sendAction('deleteTag', tag);
     },
-    saveNewLabel() {
-      let name = this.get('newLabelName');
-      this.sendAction('saveNewLabel', name);
-      this.set('newLabelName', null);
-      this.set('shouldShowNewLabelModal', false);
+    saveNewTag() {
+      let name = this.get('newTagName');
+      this.sendAction('saveNewTag', name);
+      this.set('newTagName', null);
+      this.set('shouldShowNewTagModal', false);
     },
     closeModal() {
-      this.set('shouldShowNewLabelModal', false);
+      this.set('shouldShowNewTagModal', false);
     },
     study() {
       this.sendAction('study', this.get('cardSet'));

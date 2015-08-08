@@ -15,29 +15,29 @@ export default Ember.Controller.extend({
         card.rollback();
       });
     },
-    saveNewLabel(name) {
+    saveNewTag(name) {
       if (Ember.isBlank(name)){
         return;
       }
-      let label = this.store.createRecord('label', {
+      let tag = this.store.createRecord('tag', {
         name: name,
         cardSet: this.get('model'),
       });
-      this.send('saveLabel', label);
+      this.send('saveTag', tag);
     },
-    saveLabel(label) {
-      if (Ember.isBlank(label.get('name'))) {
+    saveTag(tag) {
+      if (Ember.isBlank(tag.get('name'))) {
         return;
       }
-      label.save().then(()=>{
-        this.set('newLabelName', null);
+      tag.save().then(()=>{
+        this.set('newTagName', null);
       }).catch(()=>{
-        alert('Error saving label');
+        alert('Error saving tag');
       });
     },
-    deleteLabel(label) {
-      label.destroyRecord().catch(()=>{
-        alert('Delete label failed');
+    deleteTag(tag) {
+      tag.destroyRecord().catch(()=>{
+        alert('Delete tag failed');
       });
     },
     study(set) {

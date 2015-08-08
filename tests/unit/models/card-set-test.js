@@ -2,7 +2,7 @@ import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('card-set', 'CardSet', {
   // Specify the other units that are required for this test.
-  needs: ['model:user', 'model:card', 'model:label']
+  needs: ['model:user', 'model:card', 'model:tag']
 });
 
 test('it exists', function(assert) {

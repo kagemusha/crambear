@@ -9,23 +9,23 @@
         id='card-set-name-input'
         value=cardSet.name
         label="Name"
-        save='saveNewLabel'
+        save='saveNewTag'
       }}
     {{else}}
       {{cardSet.name}}
     {{/if}}
   </h2>
-  <div id="card-labels">
-    <span id="label-list">
-      Labels
-      {{md-btn id="show-new-label-modal" buttonType='floating' class='btn-tiny' action="showNewLabelModal" icon='mdi-content-add'}}
+  <div id="card-tags">
+    <span id="tag-list">
+      Tags
+      {{md-btn id="show-new-tag-modal" buttonType='floating' class='btn-tiny' action="showNewTagModal" icon='mdi-content-add'}}
     </span>
     <ul>
-      {{#each cardSet.labels as |label| }}
-        {{label-field
-            label=label
-            save='saveLabel'
-            delete='deleteLabel'
+      {{#each cardSet.tags as |tag| }}
+        {{tag-field
+            tag=tag
+            save='saveTag'
+            delete='deleteTag'
         }}
       {{/each}}
     </ul>
@@ -45,15 +45,15 @@
   </ul>
 </div>
 
-{{#if shouldShowNewLabelModal}}
+{{#if shouldShowNewTagModal}}
   {{#modal-dialog
-    alignmentTarget='#show-new-label-modal'
+    alignmentTarget='#show-new-tag-modal'
     alignment='right'
-    focusSelector='.label-name'
+    focusSelector='.tag-name'
     close='closeModal'
   }}
     <label>Name</label>
-    {{input class='label-name' value=newLabelName placeholder='name'}}
-    {{md-btn text='New Label' action='saveNewLabel'}}
+    {{input class='tag-name' value=newTagName placeholder='name'}}
+    {{md-btn text='New Tag' action='saveNewTag'}}
   {{/modal-dialog}}
 {{/if}}

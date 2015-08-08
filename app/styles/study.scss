@@ -14,7 +14,7 @@ $study-elem-width: 800px;
   .materialize-checkbox {
     margin-right: 10px;
     display: inline-block;
-    [type="checkbox"] + label {
+    [type="checkbox"] + tag {
       padding-left: 24px;
     }
   }

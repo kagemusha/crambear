@@ -123,17 +123,17 @@ export default Ember.Component.extend({
   statusMsg: Ember.computed('cardsLeft', 'filteredTotal', function() {
     return `${this.get('cardsLeft')}  of ${this.get('filteredTotal')} left`;
   }),
-  cardSetLabels: readOnly("cardSet.labels"),
+  cardSetTags: readOnly("cardSet.tags"),
   selectedFilterIds: Ember.A(),
   filters: Ember.computed("selectedFilterIds.@each", function() {
-    return this.get('cardSet.labels').map((function(_this) {
-      return function(label) {
-        let labelId, selected;
-        labelId = 1 * label.get("id");
-        selected = _this.get('selectedFilterIds').contains(labelId);
+    return this.get('cardSet.tags').map((function(_this) {
+      return function(tag) {
+        let tagId, selected;
+        tagId = 1 * tag.get("id");
+        selected = _this.get('selectedFilterIds').contains(tagId);
         return {
-          name: label.get('name'),
-          id: labelId,
+          name: tag.get('name'),
+          id: tagId,
           isSelected: selected
         };
       };
@@ -142,7 +142,7 @@ export default Ember.Component.extend({
 
   reset() {
     this.set("isFinished", false);
-    this.initLabels();
+    this.initTags();
     this.orderCards();
     this.next();
     return this.set("pageRendered", true);
@@ -175,17 +175,17 @@ export default Ember.Component.extend({
     if (this.get("selectedFilterIds.length") === 0) {
       return true;
     }
-    let cardLabels = card.get("labelIds");
-    if (!(cardLabels && cardLabels.get("length") > 0)) {
+    let cardTags = card.get("tagIds");
+    if (!(cardTags && cardTags.get("length") > 0)) {
       return false;
     }
     let selectedFilters = this.get('selectedFilterIds');
-    let includedLabel = selectedFilters.find(function(labelId) {
-      return cardLabels.contains(1 * labelId);
+    let includedTag = selectedFilters.find(function(tagId) {
+      return cardTags.contains(1 * tagId);
     });
-    return includedLabel != null;
+    return includedTag != null;
   },
-  initLabels() {
+  initTags() {
     return Ember.K();
   },
   next() {
@@ -236,13 +236,13 @@ export default Ember.Component.extend({
       this.set("isShowingArchived", !this.get("isShowingArchived"));
       return this.reset();
     },
-    toggleFilter(labelId) {
-      labelId *= 1;
+    toggleFilter(tagId) {
+      tagId *= 1;
       let lbls = this.get("selectedFilterIds");
-      if (lbls.contains(labelId)) {
-        lbls.removeObject(labelId);
+      if (lbls.contains(tagId)) {
+        lbls.removeObject(tagId);
       } else {
-        lbls.pushObject(labelId);
+        lbls.pushObject(tagId);
       }
       return this.reset();
     }

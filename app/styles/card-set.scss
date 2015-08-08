@@ -30,7 +30,7 @@ ul#card-list {
   width: 100%;
 }
 
-#card-labels{
+#card-tags{
   margin-bottom: 30px;
 }
 .card-editor {
@@ -48,7 +48,7 @@ ul#card-list {
   }
 }
 
-.label-editor {
+.tag-editor {
   display: inline-block;
   background: lavender;
   padding: 1px 2px;
@@ -60,14 +60,14 @@ ul#card-list {
   }
 }
 
-.label-input {
+.tag-input {
   display: inline;
 }
 
 #card-set-name-input {
   display: inline-block;
 }
-.card-labels {
+.card-tags {
   .dropdown-button {
     font-size: 12px;
     line-height: 16px;

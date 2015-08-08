@@ -15,7 +15,7 @@ export default DS.Model.extend({
 
   user: DS.belongsTo('user', { async: false }),
   cards: DS.hasMany('card', {async: true}),
-  labels: DS.hasMany('label', {async: true}),
+  tags: DS.hasMany('tag', {async: true}),
   cardCount: Ember.computed('cards.@each', function(){
     let cards = this.get('cards');
     if (Ember.isEmpty(cards)){

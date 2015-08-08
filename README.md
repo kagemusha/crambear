@@ -19,7 +19,7 @@ Everything from what you need to install to starting the app is described in the
     
 ## The App
 
-Crambear is a flash-cards app.  It will allow you to create cards sets and cards, and label your cards.  You can study sets or subsets based on labels.  At some point maybe we may add performance stats.
+Crambear is a flash-cards app.  It will allow you to create cards sets and cards, and tag your cards.  You can study sets or subsets based on tags.  At some point maybe we may add performance stats.
 
 ### Data Model
 
@@ -31,13 +31,13 @@ The basic data model is:
     CardSet
         belongs to user
         has many cards
-        has many labels
+        has many tags
 
     Card
         belongs to card_set
-        has and belongs to many labels
+        has and belongs to many tags
 
-    Label
+    Tag
         belongs to card_set
         has and belongs to many cards
 

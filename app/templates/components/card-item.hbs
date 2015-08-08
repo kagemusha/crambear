@@ -1,7 +1,7 @@
-<div class="card-labels">
-  {{#md-btn-dropdown text='Labels' belowOrigin="true" }}
-    {{#each card.cardSet.labels as |label| }}
-      {{card-label card=card label=label}}
+<div class="card-tags">
+  {{#md-btn-dropdown text='Tags' belowOrigin="true" }}
+    {{#each card.cardSet.tags as |tag| }}
+      {{card-tag card=card tag=tag}}
     {{/each}}
   {{/md-btn-dropdown}}
 </div>
