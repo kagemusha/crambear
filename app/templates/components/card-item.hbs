@@ -1,12 +1,22 @@
-{{#if card.belongsToCurrentUser}}
-  {{card-editor saveCard='saveCard' card=card}}
+<div class="card-labels">
+  {{#md-btn-dropdown text='Labels' belowOrigin="true" }}
+    {{#each card.cardSet.labels as |label| }}
+      {{card-label card=card label=label}}
+    {{/each}}
+  {{/md-btn-dropdown}}
+</div>
+
+<div class="card-panel">
+  {{#if card.belongsToCurrentUser}}
+    {{card-editor saveCard='saveCard' card=card}}
     {{md-btn buttonType='floating' isDisabled=disableDelete class='delete-card-button btn-small' action="deleteCard" actionArg=card icon='mdi-action-delete'}}
-{{else}}
-  <div class="card-front">
-    {{card.front}}
-  </div>
-  <div class="card-back">
-    {{card.back}}
-  </div>
-{{/if}}
+  {{else}}
+    <div class="card-front">
+      {{card.front}}
+    </div>
+    <div class="card-back">
+      {{card.back}}
+    </div>
+  {{/if}}
+</div>
 
