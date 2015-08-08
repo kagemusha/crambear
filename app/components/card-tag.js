@@ -4,11 +4,6 @@ export default Ember.Component.extend({
   tagName: 'li',
   tag: null,
   card: null,
-  onInsert: Ember.on('didInsertElement', function(){
-    this.get('card.tags').then(function(tags){
-      console.log(`ln: ${tags.get('length')}`);
-    });
-  }),
   cardHasTag: Ember.computed('card.tags.[]', 'tag', function(){
     return this.get('card.tags').contains(this.get('tag'));
   }),
