@@ -1,9 +1,7 @@
 <div class="card-tags">
-  {{#md-btn-dropdown text='Tags' belowOrigin="true" }}
-    {{#each card.cardSet.tags as |tag| }}
-      {{card-tag card=card tag=tag}}
-    {{/each}}
-  {{/md-btn-dropdown}}
+  {{#each card.cardSet.tags as |tag| }}
+    {{tag.name}}
+  {{/each}}
 </div>
 
 <div class="card-panel">
