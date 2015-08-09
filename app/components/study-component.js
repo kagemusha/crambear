@@ -181,7 +181,7 @@ export default Ember.Component.extend({
     }
     let selectedFilters = this.get('selectedFilterIds');
     let includedTag = selectedFilters.find(function(tagId) {
-      return cardTags.contains(1 * tagId);
+      return cardTags.contains(+tagId);
     });
     return includedTag != null;
   },
