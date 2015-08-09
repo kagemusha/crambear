@@ -1,7 +1,5 @@
-<div class="card-tags">
-  {{#each card.cardSet.tags as |tag| }}
-    {{tag.name}}
-  {{/each}}
+<div class="card-header">
+  {{card-tags tags=cardSet.tags card=card deleteCard='deleteCard' selectedTag=selectedTag}}
   {{#if showDeleteButton}}
     {{md-btn buttonType='floating' isDisabled=disableDelete class='delete-card-button btn-tiny' action="deleteCard" actionArg=card icon='mdi-action-delete'}}
   {{/if}}

@@ -1,0 +1,12 @@
+{{!so component has width even if no tags}}
+{{#if hasNoTags}}
+  &nbsp;
+{{/if}}
+
+{{#if card.tags}}
+  {{#each card.tags as |tag| }}
+    {{card-tag tag=tag card=card }}
+  {{/each}}
+{{else}}
+  {{card-tag card=card }}
+{{/if}}

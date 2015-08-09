@@ -128,3 +128,37 @@ html {
     margin: 0;
   }
 }
+
+.non-materialize {
+  input[type=text]{
+    border: none;
+    box-shadow: none;
+    &:focus {
+      box-shadow: none;
+      border-bottom: none;
+    }
+    &:focus:not([readonly]) {
+      box-shadow: none;
+      border-bottom: none;
+    }
+    &:focus:not([readonly])+label {
+      box-shadow: none;
+      border-bottom: none;
+    }
+    &.valid,
+    &:focus.valid {
+      box-shadow: none;
+      border-bottom: none;
+    }
+    &.invalid,
+    &:focus.invalid {
+      box-shadow: none;
+      border-bottom: none;
+    }
+    &.invalid + label:after,
+    &:focus.invalid + label:after {
+      box-shadow: none;
+      border-bottom: 1px solid $input-error-color;
+    }
+  }
+}

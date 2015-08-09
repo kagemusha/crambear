@@ -1,3 +1,5 @@
+@import 'variables';
+
 #card-list-section{
   margin-left: 40px;
 }
@@ -52,7 +54,7 @@
     background: white;
     height: 7rem;
     &:focus {
-      background: #fbfcbf;
+      background: $edit-color;
     }
   }
 }
@@ -76,7 +78,7 @@
 #card-set-name-input {
   display: inline-block;
 }
-.card-tags {
+.card-header {
   height: 20px;
   width: 100%;
   .dropdown-button {
@@ -90,4 +92,61 @@
   position: absolute;
   top: 0px;
   right: 0px;
+}
+
+.card-tags {
+  width: 100%;
+  font-size: 13px;
+  margin-top: 2px;
+  .tag-name {
+    display: inline;
+    background: #9BC2CF;
+    padding: 1px;
+  }
+}
+.card-tag.selected {
+ background: lightgrey;
+}
+
+.card-tag-autocomplete {
+  display: inline-block;
+}
+
+.tt-suggestion {
+  height: 1.1em;
+  line-height: 1.1em;
+  border: none;
+  &:before {
+    border: none;
+  }
+}
+
+.typeahead-wrap {
+  top: -3.5px;
+  input[type=text]{
+    width: 12px;
+    height: 1em;
+    border-bottom: none;
+    margin: 0;
+  }
+}
+
+.card-tag-autocomplete .tt-dropdown-menu.visible {
+  display: none;
+}
+
+.card-tag-autocomplete {
+  &.has-input {
+    &.has-suggestions {
+      .tt-dropdown-menu.visible {
+        display: inline-block;
+      }
+    }
+    .typeahead-wrap {
+      input[type=text]{
+        width: 100px;
+        background: $edit-color;
+      }
+    }
+  }
 }

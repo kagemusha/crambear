@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   shouldShowNewTagModal: false,
   newTagName: null,
   cardSet: null,
+  selectedTag: null,
   onInserted: Ember.on('didInsertElement', function(){
     let cardSet = this.get('cardSet');
     cardSet.get('store').createRecord('card', {cardSet: cardSet});

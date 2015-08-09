@@ -1,1 +1,13 @@
-{{md-check name=tag.name checked=isChecked}}
+<div class="tag-name">
+  {{tag.name}}
+</div>
+{{#card-tag-autocomplete
+    options=unusedSetTags
+    inputClass="card-tag-input"
+    selectedValue=newCardTag
+    unusedSetTags=unusedSetTags
+    selectItem="tagSelected"
+    as |setTag|
+}}
+  <p>{{setTag.name}}</p>
+{{/card-tag-autocomplete}}
