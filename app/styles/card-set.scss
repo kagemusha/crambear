@@ -2,32 +2,41 @@
   margin-left: 40px;
 }
 
-ul#card-list {
+#card-list {
   li {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border: black 1px solid;
     border-radius: 6px;
+    padding: 0 6px;
     background: lightblue;
-    margin-bottom: 10px;
+    margin-bottom: 24px;
+    &:hover {
+      .delete-card-button {
+        display: inherit;
+      }
+    }
   }
   .card-front {
     font-weight: bold;
   }
 }
 
-.card-panel {
+.card-pane {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background: inherit;
-  padding: 0 0 0 4px;
+  padding: 0;
   margin: 0;
 }
 
 .card-editor-field {
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 #card-tags{
@@ -41,7 +50,7 @@ ul#card-list {
   textarea {
     padding: 5px;
     background: white;
-    height: 6rem;
+    height: 7rem;
     &:focus {
       background: #fbfcbf;
     }
@@ -68,8 +77,17 @@ ul#card-list {
   display: inline-block;
 }
 .card-tags {
+  height: 20px;
+  width: 100%;
   .dropdown-button {
     font-size: 12px;
     line-height: 16px;
   }
+}
+
+.delete-card-button {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }

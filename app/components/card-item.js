@@ -4,8 +4,9 @@ export default Ember.Component.extend({
   tagName: 'li',
   card: null,
 
-  disableDelete: Ember.computed('card.isNew', function(){
-    return this.get('card.isNew');
+  showDeleteButton: Ember.computed('card.belongsToCurrentUser', 'card.isNew', function(){
+    //and css set so that delete button only shows when hovering over this card-item
+    return this.get('card.belongsToCurrentUser') && !this.get('card.isNew');
   }),
   click: function(){
     let card = this.get('card');
