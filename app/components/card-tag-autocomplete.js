@@ -14,5 +14,8 @@ export default AutoComplete.extend({
 
     return Ember.A(list);
   },
+  onInsert: Ember.on('didInsertElement', function(){
+    this.$('input').attr('tabindex', -1);
+  })
 
 });
