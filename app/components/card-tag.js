@@ -36,6 +36,9 @@ export default Ember.Component.extend({
 
   createTag() {
     let newTagName = this.get('newCardTag');
+    if (Ember.isBlank(newTagName)){
+      return;
+    }
     let tag = this.get('setTags').findBy('name', newTagName);
     if (!tag){
       tag =  this.get('card.store').createRecord('tag', {
