@@ -19,6 +19,9 @@
       .delete-card-button {
         display: inherit;
       }
+      .tag-instructions {
+        display: inline;
+      }
     }
   }
   .card-front {
@@ -149,4 +152,10 @@
       }
     }
   }
+}
+
+.tag-instructions {
+  display: none;
+  color: gray;
+  font-size: 12px;
 }

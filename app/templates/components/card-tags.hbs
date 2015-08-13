@@ -1,8 +1,3 @@
-{{!so component has width even if no tags}}
-{{#if hasNoTags}}
-  &nbsp;
-{{/if}}
-
 {{#if card.tags}}
   {{#each card.tags as |tag| }}
     {{card-tag tag=tag card=card }}
@@ -10,3 +5,4 @@
 {{else}}
   {{card-tag card=card }}
 {{/if}}
+<span class="tag-instructions {{if clicked 'hide'}}">Click to add/remove tags</span>
