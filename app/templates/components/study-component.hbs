@@ -3,6 +3,12 @@
   {{md-check name="Repeat Wrongs" checked=repeatWrongs}}
 </div>
 
+<div id='study-filters'>
+  {{#each tagFilters as |filter| }}
+    {{md-check name=filter.tag.name checked=filter.checked }}
+  {{/each}}
+</div>
+
 {{#unless isFinished}}
   {{#if isInitialized}}
     <div id="study-status">

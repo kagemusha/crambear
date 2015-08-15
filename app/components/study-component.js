@@ -37,13 +37,26 @@ const Results = Ember.Object.extend({
 });
 
 export default Ember.Component.extend({
+  cardSetTags: readOnly("cardSet.tags"),
   randomize: false,
   repeatWrongs: false,
   results: null,
+  tags: Ember.computed.readOnly("cardSet.tags"),
+  tagFilters: Ember.computed('tags', function(){
+    return this.get('tags').map((tag)=>{
+      //todo set based on qparams and/or local storage
+      let checked = false;
+      return {tag: tag, checked: checked};
+    });
+  }),
+  checkedTags: Ember.computed('tagFilters.@each.checked', function(){
+    let filters = this.get('tagFilters').filter(filter => Ember.get(filter, 'checked'));
+    return filters.map(filter => Ember.get(filter, 'tag'));
+  }),
   setKey: Ember.computed('cardSet', function(){
     return `set-settings-${this.get('cardSet.id')}`;
   }),
-  settingsChanged: Ember.observer('randomize', 'repeatWrongs', function(){
+  settingsChanged: Ember.observer('randomize', 'repeatWrongs', 'tagFilters.@each.checked', function(){
     let settings = {
       randomize: this.get('randomize'),
       repeatWrongs: this.get('repeatWrongs')
@@ -52,6 +65,7 @@ export default Ember.Component.extend({
     this.reset();
   }),
   getSettings() {
+    console.log(`get settings`);
     let settings = ClientStorage.get(this.get('setKey'));
     if (settings) {
       this.set('randomize', settings.randomize);
@@ -59,10 +73,16 @@ export default Ember.Component.extend({
     }
   },
   onWillInsert: Ember.on('willInsertElement', function(){
-    this.get('cardSet.cards').then(()=> {
-      this.getSettings();
-      this.reset();
-      this.set('isInitialized', true);
+    //make sure we have all cards and card-tags before we being
+    //card-tags really should come over with cards - when we figure
+    //this out on server side, can get rid of the inner all() promise
+    this.get('cardSet.cards').then(()=>{
+      let cardTags = this.get('cardSet.cards').map(card=> card.get('tags') );
+      Ember.RSVP.all(cardTags).then(()=> {
+        this.getSettings();
+        this.reset();
+        this.set('isInitialized', true);
+      });
     });
   }),
   cards: readOnly("cardSet.cards"),
@@ -123,22 +143,6 @@ export default Ember.Component.extend({
   statusMsg: Ember.computed('cardsLeft', 'filteredTotal', function() {
     return `${this.get('cardsLeft')}  of ${this.get('filteredTotal')} left`;
   }),
-  cardSetTags: readOnly("cardSet.tags"),
-  selectedFilterIds: Ember.A(),
-  filters: Ember.computed("selectedFilterIds.@each", function() {
-    return this.get('cardSet.tags').map((function(_this) {
-      return function(tag) {
-        let tagId, selected;
-        tagId = 1 * tag.get("id");
-        selected = _this.get('selectedFilterIds').contains(tagId);
-        return {
-          name: tag.get('name'),
-          id: tagId,
-          isSelected: selected
-        };
-      };
-    })(this));
-  }),
 
   reset() {
     this.set("isFinished", false);
@@ -169,21 +173,19 @@ export default Ember.Component.extend({
     this.set("cardsLeft", order.length);
   },
   inFilter(card) {
-    if (card.get("archived") && !this.get("isShowingArchived")) {
-      return false;
-    }
-    if (this.get("selectedFilterIds.length") === 0) {
+    //todo
+    //if (card.get("archived") && !this.get("isShowingArchived")) {
+    //  return false;
+    //}
+    let filters = this.get('checkedTags');
+    if (Ember.isEmpty(filters)) {
       return true;
     }
-    let cardTags = card.get("tagIds");
-    if (!(cardTags && cardTags.get("length") > 0)) {
+    let cardTags = card.get("tags");
+    if (Ember.isBlank(cardTags)) {
       return false;
     }
-    let selectedFilters = this.get('selectedFilterIds');
-    let includedTag = selectedFilters.find(function(tagId) {
-      return cardTags.contains(+tagId);
-    });
-    return includedTag != null;
+    return cardTags.some(tag => !!this.get('tagFilters').findBy('tag', tag));
   },
   initTags() {
     return Ember.K();
