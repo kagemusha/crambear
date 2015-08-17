@@ -3,7 +3,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   cardSet: DS.belongsTo('card-set', { async: false }),
-  tags: DS.hasMany('tag', { async: true }),
+  tags: DS.hasMany('tag', { async: false }),
   front: DS.attr(),
   back: DS.attr(),
   archived: false ,//todo: make this an attr
