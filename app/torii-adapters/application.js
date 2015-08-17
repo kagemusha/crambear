@@ -64,6 +64,7 @@ export default Ember.Object.extend({
         let store = this.get('store');
         store.unloadAll('card-set');
         store.unloadAll('card');
+        store.unloadAll('tag');
         store.unloadRecord(this.get('currentUser'));
         this.set('currentUser', null);
         Ember.run(()=>{
