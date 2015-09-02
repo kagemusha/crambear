@@ -1,39 +1,25 @@
 <div id="top-nav">
+  <div id='top-nav-left' class="nav-section">
+    {{#if isLoggedIn}}
+      {{link-to "My Sets" "dashboard" class='nav-link'}}
+      {{link-to "Public Sets" "public" class='nav-link'}}
+    {{else}}
+      <button id="signup-btn" {{action 'showModal' 'showSignupModal'}}>Get Started</button>
+    {{/if}}
+  </div>
   <div class="nav-section">
     <div id="title">
        {{link-to "Crambear" "application"}}
     </div>
   </div>
-  {{#if isLoggedIn}}
-    <div class="nav-section">
-      <div class="nav-item">
-        {{link-to "Dashboard" "dashboard"}}
-      </div>
-    </div>
-  {{/if}}
-  <div class="nav-section">
-  {{#if isLoggedIn}}
-    <div class="nav-item">
-      {{currentUser.email}}
-    </div>
-    <div class="nav-item">
-      {{md-btn text='Logout' action='logout'}}
-    </div>
-  {{else}}
-    <div class="nav-item">
-      <div>
-        <label>Login</label>
-      </div>
-    </div>
-    <div class="nav-item">
-      {{md-input value=email label="email" }}
-    </div>
-    <div class="nav-item">
-      {{md-input value=password type="password" }}
-    </div>
-    <div class="nav-item">
-      {{md-btn text='Login' action='login'}}
-    </div>
-  {{/if}}
+  <div id="top-nav-right" class="nav-section">
+    {{#if isLoggedIn}}
+      <button {{action 'logout'}}>Logout</button>
+    {{else}}
+      <button id="login-btn" {{action 'showModal' 'showLoginModal'}}>Login</button>
+    {{/if}}
   </div>
+</div>
+<div id="flashcards-title">
+  Flashcards
 </div>

@@ -5,4 +5,10 @@ export default Ember.Controller.extend({
   modalOffsetTarget: Ember.computed('hasNoSets', function(){
     return this.get('hasNoSets') ? '#create-first-set-button' : '#new-set-button';
   }),
+
+  actions: {
+    editCardSet(set) {
+      this.transitionTo('card-set', set);
+    },
+  }
 });

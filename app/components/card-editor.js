@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   card: null,
   classNames: ['card-editor'],
+  isEditingBack: false,
+
   actions: {
     hideCardEditor() {
       this.set('card.isBeingEdited', false);

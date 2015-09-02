@@ -1,15 +1,33 @@
+@import 'components/color';
+
+$primary-color: color("blue", "lighten-2") !default;
+$primary-color-light: false !default;
+$primary-color-dark: false !default;
+@if not $primary-color-light {
+  $primary-color-light: lighten($primary-color, 15%);
+}
+@if not $primary-color-dark {
+  $primary-color-dark: darken($primary-color, 15%);
+}
+$secondary-color: color("blue", "lighten-1") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+
+$link-color: color("light-blue", "darken-1") !default;
+
+@import 'components/variables';
 @import 'materialize';
 @import 'ember-cli-materialize';
 
 @import "variables";
 @import "mixins";
+@import "index";
 @import "card-set";
 @import "study";
 
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
 
-$top-nav-height: 40px;
 
 html, body {
   padding: 0;
@@ -17,12 +35,7 @@ html, body {
 }
 
 #top-nav {
-  position:fixed;
-  top: 0px;
-  left:0px;
-  width:100%;
-  z-index:2;
-  background: #49AA67;
+  margin: 0 20px;
   color: white;
   height: $top-nav-height;
   padding: 0;
@@ -30,34 +43,66 @@ html, body {
   flex-direction: row;
   justify-content: space-between;
   font-size: 12px;
-  input[type=text], input[type=password] {
-    background: white;
+  button {
+    display: inline-block;
+    padding: 0;
+    text-transform: uppercase;
+    width: 120px;
     color: black;
-  }
-  a {
-    color: white;
+    background: white;
+    border: none;
   }
   #title {
     @include vertical-centered-container;
-    padding-left: 25px;
     a {
-      font-size: 24px;
+      font-size: 32px;
     }
   }
-}
-.nav-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  a.nav-link {
+    @include vertical-centered-container;
+    margin: 0 10px;
+    color: black;
+    text-transform: uppercase;
+    width: 80px;
+    font-size: 12px;
+    height: 50px;
+    text-align: center;
+  }
 }
 
-.nav-item {
-  @include vertical-centered-container;
-  margin-right: 10px;
+.nav-section {
+  display: flex;
+  width: calc((100% - 40px)/3);
+  justify-content: center;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+#top-nav-left {
+  justify-content: flex-start;
+}
+
+#top-nav-right {
+  justify-content: flex-end;
+}
+
+#flashcards-title {
+  margin: 20px 20px 30px 20px;
+  text-align: center;
+  font-size: 28px;
+  font-family: monospace;
 }
 
 #content {
-  margin: 80px 20px 20px 20px;
+  margin: 0 20px;
+  background: #F5F5F5;
+  padding: 2px 18px;
+  min-height: 1400px;
+  h2 {
+    margin: 30px 0;
+    font-weight: bold;
+    text-align: center;
+  }
 }
 
 a {
@@ -79,7 +124,6 @@ ul {
 }
 
 .action-button {
-  background: red;
   padding: 1px 4px;
 }
 
@@ -109,31 +153,19 @@ h2 {
   }
 }
 
-#card-set-name {
-  margin-top: 20px;
-}
-
 html {
   font-size: 16px;
 }
 
-#registration-card {
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  width: 260px;
-  padding: 8px 12px;
-  input[type=text], input[type=password] {
-    height: 2.5rem;
-    margin: 0;
-  }
-}
 .materialize-checkbox {
   display: inline-block;
 }
 
-.non-materialize {
-  input[type=text]{
+input[type=text],
+input[type=email],
+input[type=password] {
+  margin: 0;
+  &.non-mdn {
     border: none;
     box-shadow: none;
     &:focus {
@@ -164,4 +196,35 @@ html {
       border-bottom: 1px solid $input-error-color;
     }
   }
+}
+
+#no-sets-button-container {
+  text-align: center;
+}
+
+.cardset-item {
+  position: relative;
+  &:hover {
+    .edit-set-btn, .delete-set-btn {
+      display: inline;
+    }
+  }
+  .set-name, .card-count {
+    color: white;
+  }
+}
+
+.edit-set-btn, .delete-set-btn {
+  display: none;
+  position: absolute;
+  top: 4px;
+  z-order: 5;
+}
+
+.edit-set-btn {
+  left: 4px;
+}
+
+.delete-set-btn {
+  right: 4px;
 }

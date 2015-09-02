@@ -1,3 +1,5 @@
-{{autosave-textarea save='saveCard' class='card-editor-field' value=card.front placeholder='front'}}
-&nbsp;
-{{autosave-textarea save='saveCard' class='card-editor-field' value=card.back placeholder='back'}}
+{{autosave-textarea save='saveCard' class='left card-editor-field' value=card.front placeholder='front'}}
+<div class='card-editor-spacer'>
+  &nbsp; &nbsp;
+</div>
+{{autosave-textarea save='saveCard' class='right card-editor-field' value=card.back placeholder='back' isEditing=isEditingBack}}

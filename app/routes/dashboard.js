@@ -17,9 +17,4 @@ export default Ember.Route.extend({
     return this.store.query('card-set', {userId: this.get('currentUser.id')});
   },
 
-  actions: {
-    study(set) {
-      this.transitionTo('study', set);
-    }
-  }
 });

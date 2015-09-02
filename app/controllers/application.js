@@ -3,12 +3,13 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.alias('userService.currentUser'),
-
   email: null,
   password: null,
   loggingOut: false,
   isLoggedIn: Ember.computed.readOnly('userService.isLoggedIn'),
-  showCardSetCreateModal: false,
+  showSignupModal: false,
+  showLoginModal: false,
+  showNewCardSetModal: false,
   newCardSetName: "", //set in modal
   onSessionStatusChange: Ember.on('init', Ember.observer('isLoggedIn', function(){
     this.transitionAway();
@@ -17,6 +18,15 @@ export default Ember.Controller.extend({
     if (!this.get('userService.isLoggedIn')){
       this.transitionToRoute('index');
     }
+  },
+  showModal(prop) {
+    this.set(prop, true);
+    this.set('openModalProp', prop);
+  },
+  closeModal(prop) {
+    let openModalProp = this.get('openModalProp');
+    this.set(openModalProp, false);
+    this.set(openModalProp, null);
   },
   actions: {
     login() {
@@ -31,7 +41,24 @@ export default Ember.Controller.extend({
           errorMessage = 'Unable to login. Email and/or password incorrect.';
         }
       }).finally(()=>{
+        this.controllerFor('application').set('showLoginModal', false);
         this.set('loggingIn', false);
+      });
+    },
+
+    signup() {
+      let email = this.get('email');
+      let password = this.get('password');
+      let passwordConfirmation = this.get('passwordConfirmation');
+      this.get('userService').register(email, password, passwordConfirmation).then(()=>{
+        this.transitionToRoute('dashboard');
+      }).catch((error)=>{
+        alert('Signup failed');
+        Ember.Logger.log(`Signup error: ${error}`);
+        //todo: better error handling
+      }).finally(()=>{
+        this.set('registering', false);
+        this.controllerFor('application').closeModal();
       });
     },
 

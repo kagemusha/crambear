@@ -1,0 +1,11 @@
+{{#modal-dialog
+  alignmentTarget='#login-btn'
+  alignment='left'
+  focusSelector='input:first'
+  close='closeModal'
+  doSomething='login'
+}}
+  {{md-input value=email label="email" type='email' class='email'}}
+  {{md-input value=password label="password" type='password'}}
+  {{md-btn text='Login' action='login'}}
+{{/modal-dialog}}

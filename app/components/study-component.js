@@ -65,7 +65,6 @@ export default Ember.Component.extend({
     this.reset();
   }),
   getSettings() {
-    console.log(`get settings`);
     let settings = ClientStorage.get(this.get('setKey'));
     if (settings) {
       this.set('randomize', settings.randomize);

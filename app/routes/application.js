@@ -4,6 +4,7 @@ export default Ember.Route.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.readOnly("userService.currentUser"),
   isLoggedIn: Ember.computed.readOnly("userService.isLoggedIn"),
+  showLoginModal: false,
 
 
   beforeModel() {
@@ -13,12 +14,13 @@ export default Ember.Route.extend({
       });
     }
   },
+
   actions: {
-    showNewCardSetModal() {
-      this.controllerFor('application').toggleProperty('showCardSetCreateModal');
+    showModal(prop) {
+      this.controllerFor('application').showModal(prop);
     },
-    toggleModal() {
-      this.controllerFor('application').toggleProperty('showCardSetCreateModal');
+    closeModal() {
+      this.controllerFor('application').closeModal();
     },
     createCardSet() {
       let name = this.controllerFor('application') .get('newCardSetName');
@@ -32,7 +34,7 @@ export default Ember.Route.extend({
         }).catch(()=>{
           alert("new set failed");
         }).finally(()=>{
-          this.controllerFor('application').set('showCardSetCreateModal', false);
+          this.controllerFor('application').closeModal('showNewCardSetModal');
         });
       }
     },

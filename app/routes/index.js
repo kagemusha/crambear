@@ -13,7 +13,9 @@ export default Ember.Route.extend({
       this.transitionTo('dashboard');
     }
   },
+
   model() {
     return this.store.query("cardSet", {public: true});
   },
+
 });

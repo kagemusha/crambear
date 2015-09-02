@@ -1,9 +1,7 @@
 
 <div id="card-list-section">
   <h2 id="card-set-name">
-    {{#unless cardSet.isEmpty}}
-      {{md-btn buttonType='floating' class='btn-small red' action='study' actionArg=cardSet icon='mdi-av-play-arrow' }}
-    {{/unless}}
+    <img id='set-bear' src="assets/images/bear.png" />
     {{#if cardSet.belongsToCurrentUser}}
       {{autosave-input
         id='card-set-name-input'
@@ -14,13 +12,16 @@
     {{else}}
       {{cardSet.name}}
     {{/if}}
+    {{#unless cardSet.isEmpty}}
+      {{md-btn buttonType='floating' class='study-btn btn-small' action='study' actionArg=cardSet icon='mdi-av-play-arrow' }}
+    {{/unless}}
   </h2>
   <div id="card-tags">
-    <span id="tag-list">
-      Tags
-      {{md-btn id="show-new-tag-modal" buttonType='floating' class='btn-tiny' action="showNewTagModal" icon='mdi-content-add'}}
-    </span>
     <ul>
+      <li id="tag-list">
+        {{md-btn id="show-new-tag-modal" buttonType='floating' class='btn-tiny' action="showNewTagModal" icon='mdi-content-add'}}
+        <label class="card-set-lbl">Card Tags&nbsp;&nbsp;</label>
+      </li>
       {{#each cardSet.tags as |tag| }}
         {{tag-field
             tag=tag
@@ -30,10 +31,10 @@
       {{/each}}
     </ul>
   </div>
-  <span class="sub-header">
-    Cards ({{cardSet.cardCount}})
+  <div id="cards-label">
     {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="gotoNewCard" icon='mdi-content-add'}}
-  </span>
+    <label class="card-set-lbl">Cards ({{cardSet.cardCount}})</label>
+  </div>
 
   <ul id="card-list">
     {{#each cardSet.cards as |card| }}

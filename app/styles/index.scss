@@ -1,0 +1,43 @@
+@import "variables";
+@import "mixins";
+
+$index-card-height: 120px;
+ul#index-card-sets {
+  li {
+    vertical-align: top;
+    border-radius: 12px;
+    display: inline-flex;
+    flex-direction:column;
+    justify-content: center;
+    //align-items: center;
+    margin: 4px;
+    width: calc(#{$index-card-height}*#{$golden-ratio});
+    height: $index-card-height;
+    text-align: center;
+    padding: 4px;
+    background: lightblue;
+    overflow: hidden;
+    color: white;
+    .set-name {
+      font-size: 24px;
+    }
+    &:nth-child(4n) {
+      background: $set-color0;
+    }
+    &:nth-child(4n+1) {
+      background: $set-color1;
+    }
+    &:nth-child(4n+2) {
+      background: $set-color2;
+    }
+    &:nth-child(4n+3) {
+      background: $set-color3;
+    }
+  }
+}
+#index-sets-container {
+  background: white;
+  padding: 10px;
+  min-height: 400px;
+
+}

@@ -1,8 +1,5 @@
 @import 'variables';
 
-#card-list-section{
-  margin-left: 40px;
-}
 
 #card-list {
   li {
@@ -10,15 +7,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: black 1px solid;
-    border-radius: 6px;
     padding: 0 6px;
-    background: lightblue;
     margin-bottom: 24px;
     &:hover {
-      .delete-card-button {
-        display: inherit;
-      }
       .tag-instructions {
         display: inline;
       }
@@ -29,6 +20,20 @@
   }
 }
 
+.card-editor-spacer {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+}
+
+.delete-card-button {
+  display: none;
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  z-index: 1;
+}
+
 .card-pane {
   display: flex;
   flex-direction: row;
@@ -36,16 +41,32 @@
   background: inherit;
   padding: 0;
   margin: 0;
+  &:hover {
+    .delete-card-button {
+      display: inline-block;
+    }
+  }
 }
 
 .card-editor-field {
   width: 100%;
   padding: 0;
   margin: 0;
+  &.left {
+    margin-right: 4px;
+  }
+  &.right {
+    margin-left: 4px;
+  }
 }
 
-#card-tags{
-  margin-bottom: 30px;
+$card-set-labels-left-margin: 10px;
+#card-tags {
+  margin: 0 0 30px $card-set-labels-left-margin;
+}
+
+#cards-label {
+  margin: 0 0 4px $card-set-labels-left-margin;
 }
 .card-editor {
   width: 100%;
@@ -53,48 +74,78 @@
   flex-direction: row;
   justify-content: space-between;
   textarea {
+    resize: none;
     padding: 5px;
     background: white;
-    height: 7rem;
+    border: none;
+    height: 9rem;
+    z-index: 2;
     &:focus {
       background: $edit-color;
     }
   }
 }
 
+#tag-list {
+  display: inline-block;
+}
 .tag-editor {
   display: inline-block;
-  background: lavender;
   padding: 1px 2px;
-  margin-bottom: 6px;
+  margin: 0 0 6px 10px;
   input[type=text] {
     height: 1.5rem;
-    width: 140px;
+    width: 100px;
     margin: 0;
+  }
+  a {
+   display: none;
+  }
+  &:hover {
+    a {
+      display: inline-block;
+      background: red;
+    }
+    input {
+      background: white;
+    }
   }
 }
 
 .tag-input {
   display: inline;
-}
-
-#card-set-name-input {
-  display: inline-block;
-}
-.card-header {
-  height: 20px;
-  width: 100%;
-  .dropdown-button {
-    font-size: 12px;
-    line-height: 16px;
+  input {
+    color: $secondary-color;
+    @include whiteback-editable;
   }
 }
 
-.delete-card-button {
-  display: none;
-  position: absolute;
-  top: 0px;
-  right: 0px;
+#content h2#card-set-name {
+  margin: 20px 0 60px 0;
+  position: relative;
+}
+
+#card-set-name-input {
+  text-align: center;
+  display: inline-block;
+  input {
+    text-align: center;
+    @include whiteback-editable;
+  }
+}
+.card-labels {
+  margin-top: -6px;
+  color: $secondary-color;
+  .tag-name {
+    font-size: 14px;
+  }
+  width: 100%;
+  .dropdown-button {
+    background: yellow;
+    z-index: 100;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 
 .card-tags {
@@ -103,7 +154,6 @@
   margin-top: 2px;
   .tag-name {
     display: inline;
-    background: #9BC2CF;
     padding: 1px;
   }
 }
@@ -143,6 +193,7 @@
     &.has-suggestions {
       .tt-dropdown-menu.visible {
         display: inline-block;
+        z-index: 10;
       }
     }
     .typeahead-wrap {
@@ -158,4 +209,26 @@
   display: none;
   color: gray;
   font-size: 12px;
+}
+
+.card-set-lbl {
+  display: inline-block;
+  width: 80px;
+}
+
+$bear-top-offset: 6px;
+$bear-left-offset: 10px;
+
+.study-btn {
+  position: absolute;
+  top: $bear-top-offset;
+  right: $bear-left-offset;
+}
+
+
+#set-bear {
+  position: absolute;
+  top: $bear-top-offset;
+  left: $bear-left-offset;
+  width: 37px;
 }

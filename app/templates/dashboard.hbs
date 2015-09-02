@@ -1,38 +1,30 @@
 <h2>
   My Sets
   {{#unless hasNoSets}}
-    {{md-btn id="new-set-button" buttonType='floating' class='btn-small' action="showNewCardSetModal" icon='mdi-content-add'}}
+    {{md-btn buttonType='floating' class='new-set-btn btn-small' action="showModal" actionArg="showNewCardSetModal" icon='mdi-content-add'}}
   {{/unless}}
 </h2>
 {{#if hasNoSets}}
-  {{md-btn text='Create your first set'
+  <div id="no-sets-button-container">
+    {{md-btn text='Create your first set'
     id='create-first-set-button'
-    action='showNewCardSetModal'
+    action='showModal'
+    actionArg='showNewCardSetModal'
     buttonType='large'
-    class='light-blue darken-1'
-  }}
+    class='new-set-btn light-blue darken-1'
+    }}
+  </div>
+{{else}}
 {{/if}}
-{{#md-table content=model as |set|}}
 
-  {{#md-table-col row=set key='name' header='Name'}}
-    {{#link-to "card-set" set}}{{set.name}}{{/link-to}}
-  {{/md-table-col}}
-
-  {{#md-table-col row=set key='cardCount' header='# Cards'}}
-    {{#link-to "card-set" set}}{{set.cardCount}} {{/link-to}}
-  {{/md-table-col}}
-
-    {{#md-table-col row=set key='actions' header='Study!'}}
-      {{#unless set.isEmpty}}
-        {{md-btn action='study' buttonType='floating' class='btn-tiny' actionArg=set icon='mdi-av-play-arrow' }}
-      {{/unless}}
-    {{/md-table-col}}
-
-  {{#md-table-col row=set key='actions' header=''}}
-    {{#if set.belongsToCurrentUser}}
-      {{md-btn action='deleteCardSet' buttonType='floating' class='btn-tiny' actionArg=set icon='mdi-action-delete' }}
-    {{/if}}
-  {{/md-table-col}}
-
-{{/md-table}}
+<div id="index-sets-container">
+  <ul id="index-card-sets">
+    {{#each model as |set| }}
+      {{card-set-item cardSet=set
+        edit=(action "editCardSet")
+        delete="deleteCardSet"
+      }}
+    {{/each}}
+  </ul>
+</div>
 

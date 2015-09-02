@@ -1,0 +1,8 @@
+{{md-btn buttonType='floating' class='edit-set-btn btn-tiny' action="edit" icon='mdi-editor-mode-edit'}}
+{{md-btn action='delete' buttonType='floating' class='delete-set-btn btn-tiny' icon='mdi-action-delete' }}
+{{#link-to "study" cardSet class='li-link' }}
+  <div class="set-name">{{cardSet.name}}</div>
+  <div class="card-count">{{cardSet.cardCount}} cards</div>
+
+{{/link-to}}
+

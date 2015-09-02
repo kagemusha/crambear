@@ -4,16 +4,15 @@
   {{outlet}}
 </div>
 
-{{#if showCardSetCreateModal}}
-  {{#modal-dialog
-    alignmentTarget=createSetModalOffsetTarget
-    alignment='right'
-    focusSelector='.card-set-name'
-    close='toggleModal'
-    doSomething='createCardSet'
-  }}
-    <label>Name</label>
-    {{input class='card-set-name' value=newCardSetName placeholder='name'}}
-    {{md-btn text='New Set' action='createCardSet'}}
-  {{/modal-dialog}}
+{{#if showLoginModal}}
+  {{partial 'modals/login' }}
 {{/if}}
+
+{{#if showSignupModal}}
+  {{partial 'modals/signup' }}
+{{/if}}
+
+{{#if showNewCardSetModal}}
+  {{partial 'modals/create-card-set' }}
+{{/if}}
+

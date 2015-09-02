@@ -3,10 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'li',
   card: null,
-
-  showDeleteButton: Ember.computed('card.belongsToCurrentUser', 'card.isNew', function(){
+  isEditingBack: false,
+  showDeleteButton: Ember.computed('card.belongsToCurrentUser', 'card.isNew', 'isEditingBack', function(){
     //and css set so that delete button only shows when hovering over this card-item
-    return this.get('card.belongsToCurrentUser') && !this.get('card.isNew');
+    return this.get('card.belongsToCurrentUser') && !this.get('card.isNew') && !this.get('isEditingBack');
   }),
   click: function(){
     let card = this.get('card');
@@ -17,8 +17,8 @@ export default Ember.Component.extend({
   },
   actions: {
     deleteCard(card) {
-      //seting isDisabled to false on delete btn
-      //doesn't disable this event; seems bug in ember-cli-materialize
+      // seting isDisabled to false on delete btn doesn't disable this event
+      // seems bug in ember-cli-materialize
       if (!this.get('disableDelete')){
         card.destroyRecord();
       }

@@ -1,0 +1,11 @@
+{{#modal-dialog
+  alignmentTarget='.new-set-btn'
+  alignment='bottom'
+  focusSelector='.card-set-name'
+  close='closeModal'
+  doSomething='createCardSet'
+}}
+  <label>Name</label>
+  {{input class='card-set-name' value=newCardSetName placeholder='name'}}
+  {{md-btn text='New Set' action='createCardSet'}}
+{{/modal-dialog}}
