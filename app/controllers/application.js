@@ -1,8 +1,10 @@
 import Ember from 'ember';
+import ENV from 'crambear/config/environment';
 
 export default Ember.Controller.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.alias('userService.currentUser'),
+  server: ENV.APP.SERVER,
   email: null,
   password: null,
   loggingOut: false,
@@ -11,24 +13,20 @@ export default Ember.Controller.extend({
   showLoginModal: false,
   showNewCardSetModal: false,
   newCardSetName: "", //set in modal
-  onSessionStatusChange: Ember.on('init', Ember.observer('isLoggedIn', function(){
-    this.transitionAway();
-  })),
-  transitionAway() {
-    if (!this.get('userService.isLoggedIn')){
-      this.transitionToRoute('index');
-    }
-  },
+
   showModal(prop) {
     this.set(prop, true);
     this.set('openModalProp', prop);
   },
+
   closeModal(prop) {
     let openModalProp = this.get('openModalProp');
     this.set(openModalProp, false);
     this.set(openModalProp, null);
   },
+
   actions: {
+
     login() {
       let email = this.get('email');
       let password = this.get('password');
