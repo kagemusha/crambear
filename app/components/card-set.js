@@ -5,10 +5,13 @@ export default Ember.Component.extend({
   shouldShowNewTagModal: false,
   newTagName: null,
   cardSet: null,
+  editable: Ember.computed.readOnly("cardSet.belongsToCurrentUser"),
   selectedTag: null,
   onInserted: Ember.on('didInsertElement', function(){
-    let cardSet = this.get('cardSet');
-    cardSet.get('store').createRecord('card', {cardSet: cardSet});
+    if (this.get('editable')){
+      let cardSet = this.get('cardSet');
+      cardSet.get('store').createRecord('card', {cardSet: cardSet});
+    }
   }),
 
   onWillDestroy: Ember.on('willDestroyElement', function(){

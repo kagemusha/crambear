@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   card: null,
   classNames: ['card-editor'],
   isEditingBack: false,
+  editable: false,
 
   actions: {
     hideCardEditor() {

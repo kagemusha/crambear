@@ -17,22 +17,31 @@
     {{/unless}}
   </h2>
   <div id="card-tags">
-    <ul>
-      <li id="tag-list">
+    <span id="tags-label">
+      {{#if cardSet.belongsToCurrentUser}}
         {{md-btn id="show-new-tag-modal" buttonType='floating' class='btn-tiny' action="showNewTagModal" icon='mdi-content-add'}}
-        <label class="card-set-lbl">Card Tags&nbsp;&nbsp;</label>
-      </li>
+      {{/if}}
+      <label>Tags&nbsp;&nbsp;</label>
+    </span>
+    <ul id="set-tags">
       {{#each cardSet.tags as |tag| }}
-        {{tag-field
+        {{#if cardSet.belongsToCurrentUser}}
+          {{tag-field
             tag=tag
             save='saveTag'
             delete='deleteTag'
-        }}
+          }}
+        {{else}}
+          <span class="static-tag-name" >{{tag.name}}</span>
+
+        {{/if}}
       {{/each}}
     </ul>
   </div>
   <div id="cards-label">
-    {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="gotoNewCard" icon='mdi-content-add'}}
+    {{#if cardSet.belongsToCurrentUser}}
+      {{md-btn id="new-card-button" buttonType='floating' class='btn-tiny' action="gotoNewCard" icon='mdi-content-add'}}
+    {{/if}}
     <label class="card-set-lbl">Cards ({{cardSet.cardCount}})</label>
   </div>
 
@@ -40,6 +49,7 @@
     {{#each cardSet.cards as |card| }}
       {{card-item
         card=card
+        notOwned=notOwned
         selectedTag=selectedTag
         saveCard='saveCard'
       }}

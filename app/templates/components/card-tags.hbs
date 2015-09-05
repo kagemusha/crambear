@@ -1,6 +1,12 @@
-{{#each card.tags as |tag| }}
-  {{card-tag tag=tag card=card }}
+{{#if ownCard }}
+  {{#each card.tags as |tag| }}
+    {{card-tag tag=tag card=card }}
+  {{else}}
+    {{card-tag card=card }}
+  {{/each}}
+  <span class="tag-instructions {{if clicked 'hide'}}">Click to add/remove tags</span>
 {{else}}
-  {{card-tag card=card }}
-{{/each}}
-<span class="tag-instructions {{if clicked 'hide'}}">Click to add/remove tags</span>
+  {{#each card.tags as |tag| }}
+    <span class='static-card-tag'>{{tag.name}}</span>
+  {{/each}}
+{{/if}}
