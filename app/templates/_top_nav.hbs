@@ -2,10 +2,10 @@
   <div id='top-nav-left' class="nav-section">
     {{#if isLoggedIn}}
       {{link-to "My Sets" "dashboard" class='nav-link'}}
-      {{link-to "Public Sets" "public" class='nav-link'}}
     {{else}}
-      <button id="signup-btn" {{action 'showModal' 'showSignupModal'}}>Get Started</button>
+      <button id="signup-btn" {{action 'showModal' 'showSignupModal'}}>Sign up</button>
     {{/if}}
+    {{link-to "Public Sets" "public" class='nav-link'}}
   </div>
   <div class="nav-section">
     <div id="title">
