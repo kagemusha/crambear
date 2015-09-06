@@ -1,5 +1,18 @@
 /* jshint node: true */
 
+//assume rails default
+var DEFAULT_DEV_SERVER = 'http://localhost:3000';
+
+/*
+* Use ember-cli-dotenv
+* if you wish to override dev server, make a .env file
+* with an entry `server=yourServerUrl`
+* ref: https://github.com/fivetanley/ember-cli-dotenv
+ */
+function getDevServer(){
+  return (process && process.env && process.env.server) || DEFAULT_DEV_SERVER;
+}
+
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'crambear',
@@ -25,8 +38,6 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.APP.SERVER = "http://localhost:3000";
-
     //these should be changed for a real app
     //see http://content-security-policy.com/#source_list
     //see https://github.com/rwjblue/ember-cli-content-security-policy
@@ -35,12 +46,13 @@ module.exports = function(environment) {
       'connect-src': "*",
       'script-src': "* 'unsafe-inline'",
       'style-src': " 'self' 'unsafe-inline'"
-    }
+    },
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.SERVER = getDevServer()
   }
 
   if (environment === 'test') {
