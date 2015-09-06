@@ -135,8 +135,7 @@ export default Ember.Component.extend({
       let x = Math.min(Math.max(event.offsetX - buttonsWidth/4, 0), maxLeft);
       let y = Math.min(Math.max(event.offsetY - buttonsHeight/2, 0), maxTop);
 
-      Ember.$('#study-buttons').css('top', `${y}px`);
-      Ember.$('#study-buttons').css('left', `${x}px`);
+      Ember.$('#study-buttons').css({'top': `${y}px`, 'left': `${x}px`});
     }
   },
   total: Ember.computed('cards', function() {
