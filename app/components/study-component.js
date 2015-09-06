@@ -120,7 +120,9 @@ export default Ember.Component.extend({
     return `${Math.round(100 * this.get('correctCount')/total)}%`;
   }),
   click(event) {
-    if (event.target.id === 'card-panel'){
+    let notResultButton = Ember.isEmpty(Ember.$(event.target).parents('#study-buttons'));
+    let clickOnCardPanel = event.target.id === 'card-panel' || !Ember.isEmpty(Ember.$(event.target).parents('#card-panel'));
+    if (clickOnCardPanel && notResultButton ){
       this.send('flip');
       let cardPanel = Ember.$('#card-panel');
       let studyButtons = Ember.$('#study-buttons');
