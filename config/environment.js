@@ -68,7 +68,10 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    // this should be env variable but must figure out way to do
+    // this which allows easy customization of various possible hosting
+    // services
+    ENV.APP.SERVER = 'https://crambear-api.herokuapp.com';
   }
 
   return ENV;
