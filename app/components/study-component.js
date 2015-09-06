@@ -11,6 +11,7 @@ const Results = Ember.Object.extend({
   ids: null,
   results: {},
   init() {
+    this.set('results', {});
     let cards = this.get('cards');
     this.get('positions').forEach((position)=>{
       this.get('results')[cards.objectAt(position).get('id')] = 0;
