@@ -4,18 +4,6 @@
     {{md-btn buttonType='floating' class='new-set-btn btn-small' action="showModal" actionArg="showNewCardSetModal" icon='mdi-content-add'}}
   {{/unless}}
 </h2>
-{{#if hasNoSets}}
-  <div id="no-sets-button-container">
-    {{md-btn text='Create your first set'
-    id='create-first-set-button'
-    action='showModal'
-    actionArg='showNewCardSetModal'
-    buttonType='large'
-    class='new-set-btn light-blue darken-1'
-    }}
-  </div>
-{{else}}
-{{/if}}
 
 <div id="index-sets-container">
   <ul id="index-card-sets">
@@ -24,6 +12,16 @@
         edit=(action "editCardSet")
         delete="deleteCardSet"
       }}
+    {{else}}
+      <div id="no-sets-button-container">
+        {{md-btn text='Create your first set'
+        id='create-first-set-button'
+        action='showModal'
+        actionArg='showNewCardSetModal'
+        buttonType='large'
+        class='new-set-btn light-blue darken-1'
+        }}
+      </div>
     {{/each}}
   </ul>
 </div>
