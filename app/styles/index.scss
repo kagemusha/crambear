@@ -6,10 +6,9 @@ ul#index-card-sets {
   li {
     vertical-align: top;
     border-radius: 12px;
-    display: inline-flex;
-    flex-direction:column;
-    justify-content: center;
-    //align-items: center;
+    @include display-inline-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
     margin: 4px;
     width: calc(#{$index-card-height}*#{$golden-ratio});
     height: $index-card-height;

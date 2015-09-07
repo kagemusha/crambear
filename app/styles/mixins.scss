@@ -15,3 +15,28 @@
     background: white;
   }
 }
+
+@mixin display-flex {
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin display-inline-flex {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin justify-content($strategy) {
+  -webkit-justify-content: $strategy;
+  justify-content: $strategy;
+}
+
+@mixin flex-grow($val) {
+  -webkit-flex-grow: $val;
+  flex-grow: $val;
+}
