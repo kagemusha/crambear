@@ -8,5 +8,6 @@
   {{md-input value=email label="email" type='text'}}
   {{md-input value=password label="password" type='password'}}
   {{md-input value=password_confirmation label="confirm password" type='password'}}
+  <div class="error-msg" id="signup-error">{{signupError}}</div>
   {{#md-btn class='btn-small' action='signup'}}Sign up{{/md-btn}}
 {{/modal-dialog}}

@@ -13,6 +13,8 @@ export default Ember.Controller.extend({
   showLoginModal: false,
   showNewCardSetModal: false,
   newCardSetName: "", //set in modal
+  loginError: null,
+  signupError: null,
 
   showModal(prop) {
     this.set(prop, true);
@@ -32,15 +34,11 @@ export default Ember.Controller.extend({
       let password = this.get('password');
       this.get('userService').login(email, password).then(()=>{
         this.transitionToRoute('dashboard');
-      }).catch((error)=>{
-        let errorMessage = error;
-        // http 401 = "Unauthorized" from jQuery XHR
-        if(error === 'Unauthorized') {
-          errorMessage = 'Unable to login. Email and/or password incorrect.';
-        }
-      }).finally(()=>{
         this.controllerFor('application').set('showLoginModal', false);
         this.set('loggingIn', false);
+        this.set('loginError', "");
+      }).catch((error)=>{
+        this.set('loginError', "Login failed. Please try again")
       });
     },
 
@@ -50,13 +48,12 @@ export default Ember.Controller.extend({
       let passwordConfirmation = this.get('passwordConfirmation');
       this.get('userService').register(email, password, passwordConfirmation).then(()=>{
         this.transitionToRoute('dashboard');
-      }).catch((error)=>{
-        alert('Signup failed');
-        Ember.Logger.log(`Signup error: ${error}`);
-        //todo: better error handling
-      }).finally(()=>{
         this.set('registering', false);
         this.controllerFor('application').closeModal();
+      }).catch((error)=>{
+        this.set('signupError', 'Signup failed. Please try again');
+        Ember.Logger.log(`Signup error: ${error}`);
+        //todo: better error handling
       });
     },
 

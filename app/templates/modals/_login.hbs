@@ -7,5 +7,6 @@
 }}
   {{md-input value=email label="email" type='email' class='email'}}
   {{md-input value=password label="password" type='password'}}
+  <div class="error-msg" id="login-error">{{loginError}}</div>
   {{md-btn text='Login' action='login'}}
 {{/modal-dialog}}
