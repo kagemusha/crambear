@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
     this.set('openModalProp', prop);
   },
 
-  closeModal(prop) {
+  closeModal() {
     let openModalProp = this.get('openModalProp');
     this.set(openModalProp, false);
     this.set(openModalProp, null);
@@ -37,8 +37,8 @@ export default Ember.Controller.extend({
         this.controllerFor('application').set('showLoginModal', false);
         this.set('loggingIn', false);
         this.set('loginError', "");
-      }).catch((error)=>{
-        this.set('loginError', "Login failed. Please try again")
+      }).catch((/*error*/)=>{
+        this.set('loginError', "Login failed. Please try again");
       });
     },
 
