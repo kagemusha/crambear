@@ -20,5 +20,5 @@ export default DS.Model.extend({
   name: attr(),
   public: attr(),
 
-  isEmpty: Ember.computed.empty('cards'),
+  isEmpty: Ember.computed.lt('cardCount', 1),
 });
