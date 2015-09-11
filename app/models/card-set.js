@@ -16,16 +16,7 @@ export default DS.Model.extend({
   user: DS.belongsTo('user', { async: false }),
   cards: DS.hasMany('card', {async: true}),
   tags: DS.hasMany('tag', {async: true}),
-  cardCount: Ember.computed('cards.@each', function(){
-    let cards = this.get('cards');
-    if (Ember.isEmpty(cards)){
-      return 0;
-    }
-    let savedCards = cards.reject((card)=>{
-      return card.get('isNew');
-    });
-    return savedCards.get('length');
-  }),
+  cardCount: attr(),
   name: attr(),
   public: attr(),
 
