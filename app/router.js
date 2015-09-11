@@ -6,7 +6,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('login');
   this.route("dashboard");
   this.route('public');
   this.route("card-set", {path: "/card-set/:card_set_id"});
