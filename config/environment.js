@@ -64,6 +64,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
+    ENV.APP.SERVER = '';
     ENV.APP.rootElement = '#ember-testing';
   }
 
