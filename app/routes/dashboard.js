@@ -4,13 +4,14 @@ export default Ember.Route.extend({
   userService: Ember.inject.service(),
   currentUser: Ember.computed.readOnly("userService.currentUser"),
 
-  onActivate: Ember.on("activate", function(){
-    this.transitionAway();
-  }),
-  transitionAway() {
+  transitionWhenUnauthenticated() {
     if (!this.get('userService.isLoggedIn')){
       this.transitionTo('/');
     }
+  },
+
+  beforeModel() {
+    this.transitionWhenUnauthenticated();
   },
 
   model() {
