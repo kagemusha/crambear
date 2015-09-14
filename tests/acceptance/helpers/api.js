@@ -4,7 +4,12 @@ export default {
   //currently payloads are taken from actual payloads; at some point use factories, but need to
   //be able to convert to ember-json-api
 
-  getCardSets(){
+  /*
+    *  If user has logged in, their card sets will have already
+    *  been sent over so return 304.  If reload of authed user
+    *  then will be a 200.
+   */
+  getCardSets(userSetsReturnCode=200){
     server(function () {
       this.get('card-sets', function (request) {
         let params = request.queryParams;
@@ -13,8 +18,9 @@ export default {
           return mockResponse(payload);
         }
         if (params.userId === '1'){
+
           let payload = {"data":[{"id":"17","type":"card-sets","links":{"self":"/card-sets/17"},"attributes":{"name":"a","card-count":4},"relationships":{"user":{"links":{"self":"/card-sets/17/relationships/user","related":"/card-sets/17/user"}},"cards":{"links":{"self":"/card-sets/17/relationships/cards","related":"/card-sets/17/cards"}},"tags":{"links":{"self":"/card-sets/17/relationships/tags","related":"/card-sets/17/tags"}}}},{"id":"19","type":"card-sets","links":{"self":"/card-sets/19"},"attributes":{"name":"b","card-count":0},"relationships":{"user":{"links":{"self":"/card-sets/19/relationships/user","related":"/card-sets/19/user"}},"cards":{"links":{"self":"/card-sets/19/relationships/cards","related":"/card-sets/19/cards"}},"tags":{"links":{"self":"/card-sets/19/relationships/tags","related":"/card-sets/19/tags"}}}}]};
-          return mockResponse(payload, 304);
+          return mockResponse(payload, userSetsReturnCode);
         }
 
       });
@@ -32,8 +38,10 @@ export default {
 
   getMe() {
     let payload = {"data":{"id":"1","type":"users","links":{"self":"/users/1"},"attributes":{"email":"t@t.com","name":"Tester","auth-token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0NDIwNzI4MzIsInN1YiI6MSwiZXhwIjoxNDQyNjc3NjMyfQ.oZXfckerScqZAi5OjNMW9EVMfglSTdG01k6izq6ttjI"},"relationships":{"card-sets":{"links":{"self":"/users/1/relationships/card-sets","related":"/users/1/card-sets"},"data":[{"type":"card-sets","id":"17"},{"type":"card-sets","id":"19"}]}}},"included":[{"id":"17","type":"card-sets","links":{"self":"/card-sets/17"},"attributes":{"name":"a","card-count":4},"relationships":{"user":{"links":{"self":"/card-sets/17/relationships/user","related":"/card-sets/17/user"}},"cards":{"links":{"self":"/card-sets/17/relationships/cards","related":"/card-sets/17/cards"}},"tags":{"links":{"self":"/card-sets/17/relationships/tags","related":"/card-sets/17/tags"}}}},{"id":"19","type":"card-sets","links":{"self":"/card-sets/19"},"attributes":{"name":"b","card-count":0},"relationships":{"user":{"links":{"self":"/card-sets/19/relationships/user","related":"/card-sets/19/user"}},"cards":{"links":{"self":"/card-sets/19/relationships/cards","related":"/card-sets/19/cards"}},"tags":{"links":{"self":"/card-sets/19/relationships/tags","related":"/card-sets/19/tags"}}}}]};
-    this.get('/users/me', ()=> {
-      return mockResponse(payload);
+    server(function () {
+      this.get('/users/me', ()=> {
+        return mockResponse(payload);
+      });
     });
   }
 };

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ClientStorage from 'crambear/util/client-storage';
 import config from 'crambear/config/environment';
 const CURRENT_USER_URL = `${config.APP.SERVER}/users/me`;
 const LOGOUT_URL = `${config.APP.SERVER}/users/sign_out`;
@@ -18,22 +17,21 @@ export default Ember.Object.extend({
   },
   open(response) {
     let user = this.pushUserToStore(response);
-    ClientStorage.set('authToken', user.get('authToken'));
+    window.localStorage.setItem('authToken', user.get('authToken'));
     return Ember.RSVP.Promise.resolve({currentUser: user});
   },
   fetch() {
     let self = this;
     return new Ember.RSVP.Promise((resolve, reject)=> {
-      let authToken = ClientStorage.get('authToken');
+      let authToken = window.localStorage.getItem('authToken');
       if (!authToken) {
         reject("No authToken present");
-        return;
       }
 
       let success = (response)=>{
         Ember.run(()=>{
           let user = self.pushUserToStore(response);
-          ClientStorage.set('authToken', user.get('authToken'));
+          window.localStorage.setItem('authToken', user.get('authToken'));
           resolve({currentUser: user});
         });
       };
@@ -58,7 +56,7 @@ export default Ember.Object.extend({
   },
   close() {
     return new Ember.RSVP.Promise((resolve, reject)=>{
-      let authToken = ClientStorage.get('authToken');
+      let authToken = window.localStorage.getItem('authToken');
 
       let success = ()=> {
         let store = this.get('store');
@@ -68,7 +66,7 @@ export default Ember.Object.extend({
         store.unloadRecord(this.get('currentUser'));
         this.set('currentUser', null);
         Ember.run(()=>{
-          ClientStorage.remove('authToken');
+          window.localStorage.removeItem('authToken');
           resolve();
         });
       };

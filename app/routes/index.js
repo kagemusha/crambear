@@ -4,11 +4,7 @@ export default Ember.Route.extend({
   userService: Ember.inject.service(),
   isLoggedIn: Ember.computed.readOnly("userService.isLoggedIn"),
 
-  onActivate: Ember.on("activate", function(){
-    this.transitionAway();
-  }),
-
-  transitionAway() {
+  beforeModel() {
     if (this.get('isLoggedIn')){
       this.transitionTo('dashboard');
     }
