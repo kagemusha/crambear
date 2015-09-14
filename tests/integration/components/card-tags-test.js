@@ -1,26 +1,24 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Models from '../models';
 
 moduleForComponent('card-tags', 'Integration | Component | card tags', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  assert.expect(2);
+let cardSet = Models.cardSet;
+let card = cardSet.cards[0];
+let tags = cardSet.tags;
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{card-tags}}`);
+test('unowned card tag renders', function(assert) {
+  assert.expect(1);
+  this.set('cardSet', cardSet);
+  this.set('card', card);
+  this.set('tags', tags);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#card-tags}}
-      template block text
-    {{/card-tags}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.render(hbs`{{card-tags tags=tags card=card ownCard=false}}`);
+  assert.equal(this.$('.static-card-tag').text().trim(), card.tags[0].name);
 });
+
+
