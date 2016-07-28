@@ -28,7 +28,7 @@ The basic data model is:
     User
         has many card_sets
 
-    CardSet
+    cardset
         belongs to user
         has many cards
         has many tags

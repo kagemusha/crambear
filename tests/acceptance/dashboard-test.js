@@ -16,7 +16,7 @@ module('Acceptance | dashboard', {
 
 test('unauthenticated user redirected to main page', (assert)=> {
   assert.expect(2);
-  Api.getCardSets(200);
+  Api.getCardsets(200);
 
   visit('/dashboard');
 
@@ -31,7 +31,7 @@ test('authenticated user goes to dashboard', (assert)=> {
   assert.expect(2);
   window.localStorage.setItem('authToken', 'cramcram');
   Api.getMe();
-  Api.getCardSets();
+  Api.getCardsets();
 
   visit('/dashboard');
 

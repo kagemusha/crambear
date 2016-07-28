@@ -1,0 +1,21 @@
+{
+  "firebase": "crambear",
+  "public": "./dist",
+  "ignore": [
+    "app/initializers/mm-inits.js"
+  ],
+  "rewrites": [
+    {
+      "source": "/tests",
+      "destination": "/tests/index.html"
+    },
+    {
+      "source": "/tests/**",
+      "destination": "/tests/index.html"
+    },
+    {
+      "source": "/**",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { moduleForComponent } from 'ember-qunit';
 
 
-moduleForComponent('create-card-set-modal', 'Integration | Component | create card set modal', {
+moduleForComponent('create-cardset-modal', 'Integration | Component | create card set modal', {
   integration: true
 });
 

@@ -16,7 +16,7 @@ module('Acceptance | index', {
 
 test('visiting /index', (assert)=> {
   assert.expect(3);
-  Api.getCardSets();
+  Api.getCardsets();
 
   visit('/');
 
@@ -32,7 +32,7 @@ test('authenticated user gets redirected to dashboard', (assert)=>{
 
   window.localStorage.setItem('authToken', 'cramcram');
   Api.getMe();
-  Api.getCardSets();
+  Api.getCardsets();
   visit('/');
   andThen(function() {
     assert.equal(currentURL(), '/dashboard');

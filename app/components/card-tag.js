@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNames: ['card-tag'],
   classNameBindings: ['selected', 'hasInput', 'hasSuggestions'],
 
-  setTags: Ember.computed.readOnly("card.cardSet.tags"),
+  setTags: Ember.computed.readOnly("card.cardset.tags"),
   unusedSetTags: Ember.computed('setTags', 'card.tags', function(){
     return this.get('setTags').filter((tag)=>{
       return !this.get('card.tags').contains(tag);
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
     if (!tag){
       tag =  this.get('card.store').createRecord('tag', {
         name: newTagName,
-        cardSet: this.get('card.cardSet')
+        cardset: this.get('card.cardset')
       });
     }
     this.saveTag(tag);

@@ -9,14 +9,14 @@ moduleForComponent('card-set-item', 'Integration | Component | card set item', {
 test('it renders', function(assert) {
   assert.expect(2);
 
-  let cardSet = Models.cardSet;
-  this.set('cardSet', cardSet);
+  let cardset = Models.cardset;
+  this.set('cardset', cardset);
 
   this.render(hbs`
-      {{card-set-item cardSet=cardSet}}
+      {{card-set-item cardset=cardset}}
   `);
-  assert.equal(this.$('.set-name').text().trim(), cardSet.name);
-  assert.equal(this.$('.card-count').text().trim(), cardSet.cardCount + ' cards');
+  assert.equal(this.$('.set-name').text().trim(), cardset.name);
+  assert.equal(this.$('.card-count').text().trim(), cardset.cardCount + ' cards');
 });
 
 //actions, which in this case involve Ember Data, need to be acceptance tests

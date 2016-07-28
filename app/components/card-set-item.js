@@ -5,10 +5,10 @@ export default Ember.Component.extend({
   tagName: 'li',
   actions: {
     edit() {
-      this.attrs.edit(this.get('cardSet'));
+      this.attrs.edit(this.get('cardset'));
     },
     delete() {
-      this.sendAction('delete', this.get('cardSet'));
+      this.sendAction('delete', this.get('cardset'));
     },
   }
 });

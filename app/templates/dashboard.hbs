@@ -1,23 +1,23 @@
 <h2>
   My Sets
   {{#unless hasNoSets}}
-    {{md-btn buttonType='floating' class='new-set-btn btn-small' action="showModal" actionArg="showNewCardSetModal" icon='mdi-content-add'}}
+    {{md-btn buttonType='floating' class='new-set-btn btn-small' action="showModal" actionArg="showNewCardsetModal" icon='mdi-content-add'}}
   {{/unless}}
 </h2>
 
 <div id="index-sets-container">
   <ul id="index-card-sets">
     {{#each model as |set| }}
-      {{card-set-item cardSet=set
-        edit=(action "editCardSet")
-        delete="deleteCardSet"
+      {{card-set-item cardset=set
+        edit=(action "editCardset")
+        delete="deleteCardset"
       }}
     {{else}}
       <div id="no-sets-button-container">
         {{md-btn text='Create your first set'
         id='create-first-set-button'
         action='showModal'
-        actionArg='showNewCardSetModal'
+        actionArg='showNewCardsetModal'
         buttonType='large'
         class='new-set-btn light-blue darken-1'
         }}

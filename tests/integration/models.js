@@ -3,7 +3,7 @@ let tag1 = {name: 'archived'};
 
 export default {
   card: {front: '前', back: '後ろ'},
-  cardSet: {
+  cardset: {
     name: '大名',
     cardCount: 2,
     cards: [

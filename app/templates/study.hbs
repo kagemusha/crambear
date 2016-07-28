@@ -1,6 +1,6 @@
 <div id="study-page">
   <div id="study-set-name">
-    {{link-to model.name 'card-set' model}}
+    {{link-to model.name 'cardset' model}}
   </div>
   {{#if model.isEmpty}}
     <div id=study-status-msg>You don't have any cards to study</div>
@@ -12,6 +12,6 @@
       class='light-blue darken-1'
     }}
   {{else}}
-    {{study-component cardSet=model}}
+    {{study-component cardset=model}}
   {{/if}}
 </div>

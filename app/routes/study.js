@@ -1,15 +1,15 @@
 import Ember from 'ember';
-import CardSetNotFound from 'crambear/mixins/card-set-not-found';
+import CardsetNotFound from 'crambear/mixins/cardset-not-found';
 
-export default Ember.Route.extend(CardSetNotFound, {
+export default Ember.Route.extend(CardsetNotFound, {
 
   model(params) {
-    return this.store.findRecord('cardSet', params.card_set_id);
+    return this.store.findRecord('cardset', params.card_set_id);
   },
 
   actions: {
-    gotoCardsetPage(cardSet) {
-      this.transitionTo('card-set', cardSet );
+    gotoCardsetPage(cardset) {
+      this.transitionTo('cardset', cardset );
     }
   }
 });

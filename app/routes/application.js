@@ -22,23 +22,23 @@ export default Ember.Route.extend({
     closeModal() {
       this.controllerFor('application').closeModal();
     },
-    createCardSet() {
-      let name = this.controllerFor('application') .get('newCardSetName');
+    createCardset() {
+      let name = this.controllerFor('application') .get('newCardsetName');
       if (!Ember.isEmpty(name)){
         //while this is not necessary for the server, which is going to use its current user,
         //it is necessary for unrefreshed
-        let newSet = this.store.createRecord('card-set', {name: name, user: this.get('currentUser')});
-        newSet.save().then((cardSet)=>{
-          this.controllerFor('application') .set('newCardSetName', '');
-          this.transitionTo('card-set', cardSet);
+        let newSet = this.store.createRecord('cardset', {name: name, user: this.get('currentUser')});
+        newSet.save().then((cardset)=>{
+          this.controllerFor('application') .set('newCardsetName', '');
+          this.transitionTo('cardset', cardset);
         }).catch(()=>{
           alert("new set failed");
         }).finally(()=>{
-          this.controllerFor('application').closeModal('showNewCardSetModal');
+          this.controllerFor('application').closeModal('showNewCardsetModal');
         });
       }
     },
-    deleteCardSet(set) {
+    deleteCardset(set) {
       set.deleteRecord();
       set.save().catch(()=>{
         alert('error deleting set');

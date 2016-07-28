@@ -15,7 +15,7 @@ export default Ember.Route.extend({
   },
 
   model() {
-    return this.store.query('card-set', {userId: this.get('currentUser.id')});
+    return this.store.query('cardset', {userId: this.get('currentUser.id')});
   },
 
 });

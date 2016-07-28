@@ -1,6 +1,6 @@
 import { test, moduleForModel } from 'ember-qunit';
 
-moduleForModel('card-set', 'CardSet', {
+moduleForModel('cardset', 'Cardset', {
   // Specify the other units that are required for this test.
   needs: ['model:user', 'model:card', 'model:tag']
 });

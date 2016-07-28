@@ -7,8 +7,8 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    editCardSet(set) {
-      this.transitionTo('card-set', set);
+    editCardset(set) {
+      this.transitionTo('cardset', set);
     },
   }
 });

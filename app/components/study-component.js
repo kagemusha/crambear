@@ -38,11 +38,11 @@ const Results = Ember.Object.extend({
 });
 
 export default Ember.Component.extend({
-  cardSetTags: readOnly("cardSet.tags"),
+  cardsetTags: readOnly("cardset.tags"),
   randomize: false,
   repeatWrongs: false,
   results: null,
-  tags: Ember.computed.readOnly("cardSet.tags"),
+  tags: Ember.computed.readOnly("cardset.tags"),
   tagFilters: Ember.computed('tags', function(){
     return this.get('tags').map((tag)=>{
       //todo set based on qparams and/or local storage
@@ -54,8 +54,8 @@ export default Ember.Component.extend({
     let filters = this.get('tagFilters').filter(filter => Ember.get(filter, 'checked'));
     return filters.map(filter => Ember.get(filter, 'tag'));
   }),
-  setKey: Ember.computed('cardSet', function(){
-    return `set-settings-${this.get('cardSet.id')}`;
+  setKey: Ember.computed('cardset', function(){
+    return `set-settings-${this.get('cardset.id')}`;
   }),
   settingsChanged: Ember.observer('randomize', 'repeatWrongs', 'tagFilters.@each.checked', function(){
     let settings = {
@@ -76,8 +76,8 @@ export default Ember.Component.extend({
     //make sure we have all cards and card-tags before we being
     //card-tags really should come over with cards - when we figure
     //this out on server side, can get rid of the inner all() promise
-    this.get('cardSet.cards').then(()=>{
-      let cardTags = this.get('cardSet.cards').map(card=> card.get('tags') );
+    this.get('cardset.cards').then(()=>{
+      let cardTags = this.get('cardset.cards').map(card=> card.get('tags') );
       Ember.RSVP.all(cardTags).then(()=> {
         this.getSettings();
         this.reset();
@@ -85,8 +85,8 @@ export default Ember.Component.extend({
       });
     });
   }),
-  cards: readOnly("cardSet.cards"),
-  cardSetName: readOnly("cardSet.name"),
+  cards: readOnly("cardset.cards"),
+  cardsetName: readOnly("cardset.name"),
   currentCardPostion: null,
   currentCard: Ember.computed('currentCardPosition', function(){
     let position = this.get('currentCardPosition');

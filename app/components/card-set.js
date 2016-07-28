@@ -4,18 +4,18 @@ const NEW_CARD_FRONT_SELECTOR = 'ul li:last textarea:first';
 export default Ember.Component.extend({
   shouldShowNewTagModal: false,
   newTagName: null,
-  cardSet: null,
-  editable: Ember.computed.readOnly("cardSet.belongsToCurrentUser"),
+  cardset: null,
+  editable: Ember.computed.readOnly("cardset.belongsToCurrentUser"),
   selectedTag: null,
   onInserted: Ember.on('didInsertElement', function(){
     if (this.get('editable')){
-      let cardSet = this.get('cardSet');
-      cardSet.get('store').createRecord('card', {cardSet: cardSet});
+      let cardset = this.get('cardset');
+      cardset.get('store').createRecord('card', {cardset: cardset});
     }
   }),
 
   onWillDestroy: Ember.on('willDestroyElement', function(){
-    let cards = this.get('cardSet.cards');
+    let cards = this.get('cardset.cards');
 
     //this can happen when logout while on this page
     if (!cards) {
@@ -56,7 +56,7 @@ export default Ember.Component.extend({
       this.set('shouldShowNewTagModal', false);
     },
     study() {
-      this.sendAction('study', this.get('cardSet'));
+      this.sendAction('study', this.get('cardset'));
     }
   }
 });

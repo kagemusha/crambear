@@ -15,7 +15,7 @@ module('Acceptance | login', {
 
 test('login', function(assert) {
   assert.expect(1);
-  Api.getCardSets(304);
+  Api.getCardsets(304);
   Api.getSignIn();
 
   visit('/');

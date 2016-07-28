@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
       card.save().then((card)=>{
         card.set('isBeingEdited', false);
         if (wasNewCard){
-          this.store.createRecord('card', {cardSet: this.get('model')});
+          this.store.createRecord('card', {cardset: this.get('model')});
         }
       }).catch((error)=>{
         Ember.Logger.log(`Error saving card: ${error}`);
@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
       }
       let tag = this.store.createRecord('tag', {
         name: name,
-        cardSet: this.get('model'),
+        cardset: this.get('model'),
       });
       this.send('saveTag', tag);
     },

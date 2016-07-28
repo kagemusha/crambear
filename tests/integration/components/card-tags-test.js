@@ -6,14 +6,14 @@ moduleForComponent('card-tags', 'Integration | Component | card tags', {
   integration: true
 });
 
-let cardSet = Models.cardSet;
-let card = cardSet.cards[0];
-let tags = cardSet.tags;
+let cardset = Models.cardset;
+let card = cardset.cards[0];
+let tags = cardset.tags;
 
 
 test('unowned card tag renders', function(assert) {
   assert.expect(1);
-  this.set('cardSet', cardSet);
+  this.set('cardset', cardset);
   this.set('card', card);
   this.set('tags', tags);
 

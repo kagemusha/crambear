@@ -11,8 +11,8 @@ export default Ember.Controller.extend({
   isLoggedIn: Ember.computed.readOnly('userService.isLoggedIn'),
   showSignupModal: false,
   showLoginModal: false,
-  showNewCardSetModal: false,
-  newCardSetName: "", //set in modal
+  showNewCardsetModal: false,
+  newCardsetName: "", //set in modal
   loginError: null,
   signupError: null,
 
