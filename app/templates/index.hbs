@@ -3,7 +3,7 @@
 <div id="index-sets-container">
   <ul id="index-card-sets">
     {{#each model as |set| }}
-      {{#link-to "study" set tagName="li" class='li-link' }}
+      {{#link-to "study" set.id tagName="li" class='li-link' }}
         <div class="set-name">{{set.name}}</div>
         <div class="card-count">{{set.cardCount}} cards</div>
       {{/link-to}}
