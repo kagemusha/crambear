@@ -20,6 +20,7 @@ export function emberAjaxRequest(type, url, data, options) {
       data: data,
       success: success,
       error: error,
+      //contentType: "application/json; charset=utf-8",
       dataType: 'json'
     };
 

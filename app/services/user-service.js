@@ -15,6 +15,7 @@ export default Ember.Service.extend({
   },
   register(email, password, passwordConfirmation) {
     let session = this.get('session');
+    //calls open method in torii-providers/registration
     return session.open('registration', {
       user: {
         email: email,
