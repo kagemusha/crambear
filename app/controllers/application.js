@@ -37,7 +37,8 @@ export default Ember.Controller.extend({
         this.controllerFor('application').set('showLoginModal', false);
         this.set('loggingIn', false);
         this.set('loginError', "");
-      }).catch((/*error*/)=>{
+      }).catch((error) => {
+        console.log(`error`, error);
         this.set('loginError', "Login failed. Please try again");
       });
     },

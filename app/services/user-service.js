@@ -7,10 +7,8 @@ export default Ember.Service.extend({
     let session = this.get('session');
     this.set('loggingIn', true);
     return session.open('application', {
-      user: {
-        email: email,
-        password: password,
-      }
+      email: email,
+      password: password,
     });
   },
   register(email, password, passwordConfirmation) {
