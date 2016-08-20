@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from 'crambear/config/environment';
-const CURRENT_USER_URL = `${config.APP.SERVER}/users/me`;
+const CURRENT_USER_URL = `${config.APP.SERVER}/api/me`;
 const LOGOUT_URL = `${config.APP.SERVER}/api/sessions`;
 
 export default Ember.Object.extend({
@@ -10,7 +10,7 @@ export default Ember.Object.extend({
   pushUserToStore(userData) {
     let store = this.get('store');
     const userJson = userData.user.data;
-    userJson.attributes.authToken = userData.token;
+    userJson.attributes.authToken = userData.token || window.localStorage.getItem('authToken');
     store.pushPayload('user', userJson);
     let user = store.peekRecord('user', userJson.id);
     this.set('currentUser', user);
