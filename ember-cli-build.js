@@ -6,9 +6,6 @@ module.exports = function(defaults) {
     // Add options here
     dotEnv: {
       clientAllowedKeys: ['server']
-    },
-    pretender: {
-      enabled: true
     }
   });
 

@@ -18,6 +18,7 @@ module.exports = function(environment) {
     modulePrefix: 'crambear',
     environment: environment,
     baseURL: '/',
+    rootURL: '/',
     locationType: 'auto',
     torii: {
       sessionServiceName: 'session',
@@ -38,15 +39,6 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    //these should be changed for a real app
-    //see http://content-security-policy.com/#source_list
-    //see https://github.com/rwjblue/ember-cli-content-security-policy
-    ENV.contentSecurityPolicy = {
-      'default-src': "*",
-      'connect-src': "*",
-      'script-src': "* 'unsafe-inline'",
-      'style-src': " 'self' 'unsafe-inline'"
-    };
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
