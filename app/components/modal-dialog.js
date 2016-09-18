@@ -10,18 +10,18 @@ export default ModalDialog.extend({
   //    Ember.$(focusSelector).focus();
   //  }
   //}),
-  setup: Ember.on('didInsertElement', function() {
-    Ember.$('body').on('keydown.modal-dialog', (e) => {
-      if (e.keyCode === 27) {
-        this.sendAction('close');
-      }
-      if (e.keyCode === 13) {
-        this.sendAction('doSomething');
-      }
-    });
-  }),
-
-  teardown: Ember.on('willDestroyElement', function() {
-    Ember.$('body').off('keyup.modal-dialog');
-  }),
+  //setup: Ember.on('didInsertElement', function() {
+  //  Ember.$('body').on('keydown.modal-dialog', (e) => {
+  //    if (e.keyCode === 27) {
+  //      this.sendAction('close');
+  //    }
+  //    if (e.keyCode === 13) {
+  //      this.sendAction('doSomething');
+  //    }
+  //  });
+  //}),
+  //
+  //teardown: Ember.on('willDestroyElement', function() {
+  //  Ember.$('body').off('keyup.modal-dialog');
+  //}),
 });
