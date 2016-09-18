@@ -16,8 +16,6 @@ $error-color: color("red", "base") !default;
 $link-color: color("light-blue", "darken-1") !default;
 
 @import 'components/variables';
-@import 'materialize';
-@import 'ember-cli-materialize';
 
 @import "variables";
 @import "mixins";

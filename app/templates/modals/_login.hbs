@@ -4,9 +4,9 @@
   focusSelector='input:first'
   close='closeModal'
   doSomething='login'
+  class="login-modal"
 }}
-  {{md-input value=email label="email" type='email' class='email'}}
-  {{md-input value=password label="password" type='password' class='password'}}
-  <div class="error-msg" id="login-error">{{loginError}}</div>
-  {{md-btn text='Login' action='login' class='submit-login-btn'}}
+  {{input value=email label="email" type='email' class='email'}}
+  {{input value=password label="password" type='password' class='password'}}
+  <button {{action 'login'}} class='submit-login-btn'>Login</button>
 {{/modal-dialog}}
