@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
       let password = this.get('password');
       this.get('userService').login(email, password).then(()=>{
         this.transitionToRoute('dashboard');
-        this.controllerFor('application').set('showLoginModal', false);
+        this.set('showLoginModal', false);
         this.set('loggingIn', false);
         this.set('loginError', "");
       }).catch((error) => {

@@ -3,15 +3,18 @@ import config from 'crambear/config/environment';
 const CURRENT_USER_URL = `${config.APP.SERVER}/api/me`;
 const LOGOUT_URL = `${config.APP.SERVER}/api/sessions`;
 
+const { inject } = Ember;
+
 export default Ember.Object.extend({
-  userService: Ember.inject.service(),
+  store: inject.service(),
+  userService: inject.service(),
   currentUser: Ember.computed.alias("userService.currentUser"),
 
   pushUserToStore(userData) {
     let store = this.get('store');
     const userJson = userData.user.data;
-    userJson.attributes.authToken = userData.token || window.localStorage.getItem('authToken');
-    store.pushPayload('user', userJson);
+    userJson.attributes["auth-token"] = userData.token || window.localStorage.getItem('authToken');
+    store.pushPayload('user', userData.user);
     let user = store.peekRecord('user', userJson.id);
     this.set('currentUser', user);
     return user;
