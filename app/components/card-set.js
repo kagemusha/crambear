@@ -8,10 +8,10 @@ export default Ember.Component.extend({
   editable: Ember.computed.readOnly("cardset.belongsToCurrentUser"),
   selectedTag: null,
   onInserted: Ember.on('didInsertElement', function(){
-    if (this.get('editable')){
-      let cardset = this.get('cardset');
-      cardset.get('store').createRecord('card', {cardset: cardset});
-    }
+    //if (this.get('editable')){
+    //  let cardset = this.get('cardset');
+    //  cardset.get('store').createRecord('card', {cardset: cardset});
+    //}
   }),
 
   onWillDestroy: Ember.on('willDestroyElement', function(){

@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
   closeModal() {
     let openModalProp = this.get('openModalProp');
     this.set(openModalProp, false);
-    this.set(openModalProp, null);
+    //this.set(openModalProp, null);
   },
 
   actions: {
