@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  session: Ember.inject.service("session"),
   currentUser: null,
   isLoggedIn: Ember.computed.notEmpty('currentUser'),
   login(email, password) {
