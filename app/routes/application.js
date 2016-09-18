@@ -29,7 +29,7 @@ export default Ember.Route.extend({
         //it is necessary for unrefreshed
         let newSet = this.store.createRecord('cardset', {name: name, user: this.get('currentUser')});
         newSet.save().then((cardset)=>{
-          this.controllerFor('application') .set('newCardsetName', '');
+          this.controllerFor('application').set('newCardsetName', '');
           this.transitionTo('cardset', cardset);
         }).catch(()=>{
           alert("new set failed");
