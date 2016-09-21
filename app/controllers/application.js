@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
       this.get('userService').register(email, password, passwordConfirmation).then(()=>{
         this.transitionToRoute('dashboard');
         this.set('registering', false);
-        this.controllerFor('application').closeModal();
+        this.closeModal();
       }).catch((error)=>{
         this.set('signupError', 'Signup failed. Please try again');
         Ember.Logger.log(`Signup error: ${error}`);
